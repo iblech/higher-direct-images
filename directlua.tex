@@ -56,6 +56,11 @@ Your abstract.
 
 \section{Introduction}
 
+\begin{itemize}
+\item Give definitions of presheaves, sheaves, stalks.
+\end{itemize}
+
+
 \section{Locally constant sheaves}
 
 \begin{itemize}
@@ -93,7 +98,18 @@ this should turn out to be helpful).
 \end{itemize}
 
 
-\section{Čech methods}
+\section{Sheaf cohomology and higher direct images}
+
+\begin{itemize}
+\item Give the definition of sheaf cohomology. State $H^0 = \Gamma$.
+\item Give motivation for sheaf cohomology: triviality of ordinary cohomology
+in some cases (irreducible schemes), Euler characteristic, Leray spectral
+sequence, classification of geometric objects
+\item Give the definition of higher direct images.
+\end{itemize}
+
+
+\subsection{Čech methods}
 
 \begin{itemize}
 \item Give the definition (of the ordered Čech complex).
@@ -106,35 +122,6 @@ sketch the first step of the proof. Link to the very detailed reference
 \url{http://mathoverflow.net/questions/4214/equivalence-of-grothendieck-style-versus-cech-style-sheaf-cohomology}.
 \end{itemize}
 
-\begin{verbatim}
-2. Direkte Bilder
-
-* Definition Pushforward
-* Lemma über Halme des Pushforwards im Fall des Vordrückens längs
-  abgeschlossener Abbildungen
-* viele Beispiele, möglichst explizite Beschreibungen der direkten Bilder
-  (sich drehende Gitter usw.)
-* dabei fallen vielleicht ein paar allgemeine Lemmas/Beobachtungen ab
-* Wann ist das direkte Bild einer lokal konstanten Garbe wieder lokal
-  konstant? (Vielleicht muss man über sog. konstruierbare Garben reden.
-  Ich glaube, dass das Garben sind, die auf einer Stratifizierung des
-  Raums lokal konstant sind. Auf so etwas sind wir schon gestoßen, etwa
-  bei unserem Torusbeispiel: Außerhalb der kritischen Punkte war die
-  Garbe lokal konstant.)
-
-4. Höhere direkte Bilder
-
-* Definition höhere direkte Bilder
-* viele Beispiele, wie man sie berechnet/möglichst explizit beschreibt
-
-5. Serre-Spektralsequenz
-
-* Definition
-* viele Beispiele, auch mit Differentialen und Ringstruktur
-* Kleinsche Flasche
-* Unit sphere tangent bundle von Sphären
-
-\end{verbatim}
 
 \section*{Locally constant sheaves}
 
@@ -202,6 +189,7 @@ Consider the cohomology class in $H^0(D^+,E)$ represented by the cocycle which m
 On the other hand the cohomology class in $H^0(D^-,E)$ represented by the cocycle which maps $0.5\mapsto (c,d)\in\Z^2$ maps $0.1\mapsto (d,c)$ since we have to let the monodromy act first. Therefore the restriction homomorphism $H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ maps $(c,d)\mapsto ((d,c),(c,d))$.
 Mere calculation shows that the cokernel of $H^0(D^+,E)\oplus H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ is isomorphic to $\Z$ yielding $$H^1(S^1,E)\cong\Z\text{.}$$
 \end{ex}
+
 
 \section*{Direct Images}
 \begin{ex}\label{twosheet}
@@ -282,6 +270,7 @@ A similar argument shows
 \end{align*}
 and then $\tilde{\gamma}(2\pi)=[\psi^{-1}(1,0)]_1$. Together with a similar calculation on the other generator of the stalk at $1$ we conclude that in the monodromy representation $\pi_1S^1\curvearrowright\Z^2$ the generator of $\pi_1S^1$ interchanges the two summands of $\Z^2$ -- the stalk of $p_*\underline{\Z}$ at the point $1\in S^1$.
 
+
 \section*{The Serre Spectral Sequence}
 \begin{ex}Every covering is a fibration and hence yields a Serre spectral sequence converging to the cohomology of the total space. Revisiting Example \ref{twosheet} we observe that every preimage of a point consists of two discrete points and hence alle higher direct images $R^ip_*\underline{\Z},i>0$ vanish. Therefore the Serre spetral sequence looks as follows:\\
 \begin{sseq}[grid=none,labelstep=1,entrysize=1.8cm,xlabels={0;;1;;2}]{0...4}{0...1}
@@ -302,4 +291,12 @@ For $k=0$ this is obvious since $H^0(S^1,p_*\underline{\Z})=\Gamma p_*\underline
 \ssdrop{\Z}\ssmove{0}{2}
 \end{sseq}\\
 \end{ex}
+
+\begin{itemize}
+\item definition
+\item many examples, also with differentials and ring structure
+\item Klein bottle
+\item Unit sphere tangent bundle of spheres
+\end{itemize}
+
 \end{document}
