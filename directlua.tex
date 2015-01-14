@@ -1,0 +1,305 @@
+%"/usr/texbin/lualatex" -interaction=nonstopmode %.tex|open %.pdf
+\documentclass[10pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm,amssymb,stmaryrd,color,graphicx,multirow}
+\usepackage{cmbright}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{setspace}
+\usepackage{bussproofs}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage[bookmarksdepth=2,pdfencoding=auto]{hyperref}
+\usepackage[all]{xy}
+\usepackage{sseq}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees,positioning,decorations.pathreplacing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}[defn]{Example}
+\theoremstyle{plain}
+
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{cor}[defn]{Corollary}
+\newtheorem{lemma}[defn]{Lemma}
+\newtheorem{thm}[defn]{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{rem}[defn]{Remark}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\union}{\cup}
+\newcommand{\intersection}{\cap}
+\newcommand{\ev}{\mathrm{ev}}
+
+\title{Higher direct images for dummies}
+
+\author{Ingo Blechschmidt, Pascuale Zenobio De Rossi}
+
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+Your abstract.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+\section{Locally constant sheaves}
+
+\begin{itemize}
+\item Give definition.
+\item Explain sources of examples (and their usefulness): constant sheaves
+(duh), direct images (sometimes), sheaves of solutions of differential
+equations; and of course examples induced by covering spaces, representations
+of the fundamental groupoid, and vector bundles with flat connection.
+\item Explain the equivalence of locally constant sheaves and covering spaces;
+also discuss how~$f^*$ and~$f_*$ look in this picture.
+\item Explain the equivalence of locally constant sheaves and representations
+of the fundamental groupoid. Calculate examples of the induced representation,
+for instance with the sheaf~$\{ f \,|\, f' = \frac{1}{2z} f \}$
+on~$\mathbb{C}^\times$ (which has monodromy~$f \mapsto -f$). Also explain how
+to restrict on representations of the fundamental group at some fixed base
+point (find out the technical hypotheses needed for this).
+\item Explain the equivalence of locally constant sheaves and vector bundles
+with flat connection. Warn that a visual representation of a vector bundles
+necessarily lives in~$\mathbb{R}^3$ and thus, somewhat unfortunately, comes
+with an induced connection.
+\end{itemize}
+
+
+\section{Direct images}
+
+\begin{itemize}
+\item Give the definition.
+\item Explain how to easily calculate the stalks of the direct image in case
+the map in question was closed. Explain how this is related to ``proper base
+change''. Explain why closedness is intuitively necessary. Of course, give
+\url{https://www2.math.uni-paderborn.de/fileadmin/Mathematik/People/wedhorn/Lehre/SkriptMannigfaltigkeiten.pdf}
+as a reference.
+\item Give description in terms of generators and relations (in the case that
+this should turn out to be helpful).
+\end{itemize}
+
+
+\section{Čech methods}
+
+\begin{itemize}
+\item Give the definition (of the ordered Čech complex).
+\item Give lemma that Čech cohomology = sheaf cohomology. Sketch the very basic
+idea of the proof.
+\item Also give lemma that sheaf cohomology = singular cohomology. Again,
+sketch the first step of the proof. Link to the very detailed reference
+\url{http://www3.nd.edu/~lnicolae/sheaves_coh.pdf}. Also check out
+\url{http://www.math.ru.nl/~mgroth/teaching/algtopII14/Section08.pdf} and
+\url{http://mathoverflow.net/questions/4214/equivalence-of-grothendieck-style-versus-cech-style-sheaf-cohomology}.
+\end{itemize}
+
+\begin{verbatim}
+2. Direkte Bilder
+
+* Definition Pushforward
+* Lemma über Halme des Pushforwards im Fall des Vordrückens längs
+  abgeschlossener Abbildungen
+* viele Beispiele, möglichst explizite Beschreibungen der direkten Bilder
+  (sich drehende Gitter usw.)
+* dabei fallen vielleicht ein paar allgemeine Lemmas/Beobachtungen ab
+* Wann ist das direkte Bild einer lokal konstanten Garbe wieder lokal
+  konstant? (Vielleicht muss man über sog. konstruierbare Garben reden.
+  Ich glaube, dass das Garben sind, die auf einer Stratifizierung des
+  Raums lokal konstant sind. Auf so etwas sind wir schon gestoßen, etwa
+  bei unserem Torusbeispiel: Außerhalb der kritischen Punkte war die
+  Garbe lokal konstant.)
+
+4. Höhere direkte Bilder
+
+* Definition höhere direkte Bilder
+* viele Beispiele, wie man sie berechnet/möglichst explizit beschreibt
+
+5. Serre-Spektralsequenz
+
+* Definition
+* viele Beispiele, auch mit Differentialen und Ringstruktur
+* Kleinsche Flasche
+* Unit sphere tangent bundle von Sphären
+
+\end{verbatim}
+
+\section*{Locally constant sheaves}
+
+\begin{ex}\label{twistarsch}
+Consider $S^1$ together with the locally constant sheaf of typical stalk $\Z^2$ and monodromy representation $[\gamma].(a,b)=(b,a)$ where $[\gamma]$ is a generator of $\pi_1S^1$. We want to calculate its sheaf cohomology via cohomology with local coefficient system. The bundle of coefficients $E$ is given as $$E:=[0,1]\times\Z^2/\sim$$ with the identification $(0,(a,b))\sim (1,[\gamma].(a,b))=(1,(b,a))$ and the obvious projection $E\to S^1$. We want to apply the Mayer-Vietoris sequence to the standard decomposition $S^1=D^+\union D^-$ of $S^1$ into two open intervals yielding the exactness of
+\[\begin{xy}
+  \xymatrix{
+  H^{k-1}(D^+,E)\oplus H^{k-1}(D^-,E)\ar[r] & H^{k-1}(D^+\intersection D^-,E)\ar[r] & H^k(S^1,E)\ar[r] & H^k(D^+,E)\oplus H^k(D^-,E)
+  } 
+  \end{xy}\]
+On a simply connected space a local system of coefficients is globally constant and this shows that $H^k(S^1,E)=0$ for $k>1$. For $k=1$ the sequence becomes
+\begin{align}\label{arsch}
+\begin{xy}
+  \xymatrix{
+  H^0(D^+,E)\oplus H^0(D^-,E)\ar[r]\ar[d] & H^0(D^+\intersection D^-,E)\ar[r]\ar[d] & H^1(S^1,E)\ar[r] & 0\\
+  \Z^2\oplus\Z^2\ar[r] & \Z^2\oplus\Z^2 & & 
+  }
+  \end{xy}
+\end{align}
+We have to identify the lower arrow.\newline
+\begin{tikzpicture}[scale=1]
+\draw (0,0) -- (10,0);
+\draw (0,0.5) -- (0,-0.5);
+\draw (0,0.5) -- (0.25,0.5);
+\draw (0,-0.5) -- (0.25,-0.5);
+\draw (10,0.5) -- (10,-0.5);
+\draw (10,0.5) -- (9.75,0.5);
+\draw (10,-0.5) -- (9.75,-0.5);
+\draw (6,-0.5) arc (-30:30:1);
+\draw (4,0.5) arc (150:210:1);
+\draw (1,-0.5) arc (-30:30:1);
+\draw (9,0.5) arc (150:210:1);
+\draw [decorate,decoration={brace,amplitude=10pt},xshift=-5mm,yshift=42mm, rotate around={-90:(0,0)}]
+(3.5,0.65) -- (3.5,6.5)node [black,midway,xshift=9pt] {\footnotesize
+$\space$};
+\draw [decorate,decoration={brace,amplitude=5pt},xshift=90mm,yshift=42mm, rotate around={-90:(0,0)}]
+(3.5,0) -- (3.5,1)node [black,midway,xshift=9pt] {\footnotesize
+$\space$};
+\draw [decorate,decoration={brace,amplitude=10pt},xshift=105mm,yshift=-42mm, rotate around={90:(0,0)}]
+(3.5,0.65) -- (3.5,6.5)node [black,midway,xshift=9pt] {\footnotesize
+$\space$};
+\draw [decorate,decoration={brace,amplitude=5pt},xshift=10mm,yshift=-42mm, rotate around={90:(0,0)}]
+(3.5,0) -- (3.5,1)node [black,midway,xshift=9pt] {\footnotesize
+$\space$};
+\draw [->] (7,3) arc (100:140:120pt);
+\draw [->] (8,3) arc (60:25:100pt);
+\draw (7.5,3) node {$D^+$};
+\draw [->] (4,-3) arc (270:220:120pt);
+\draw [->] (5,-3) arc (270:340:60pt);
+\draw (4.6,-3) node {$D^-$};
+\draw[fill=black] (0.5,0) circle (0.1);
+\draw[fill=black] (5,0) circle (0.1);
+\draw (0.5,0.5) node {$0.1$};
+\draw (5,0.5) node {$0.5$};
+\draw (11,0) node {$S^1$};
+\end{tikzpicture}\newline
+For an arbitrary space $X$ a cochain representing a class in $H^0(X,E)$ assigns to every point $x\in X$ a value in the corresponding fibre $E_x$. The cochain condition means that this value is constant on connected components of $X$. There are no nontrivial coboundaries in this dimension. Therefore we have a very clear understanding of how the groups in the diagram \ref{arsch} are isomorphic to $\Z^k$ namely by evaluation at some fixed points:
+\begin{align}\label{arsch2}
+  \xymatrix{
+  H^0(D^+,E)\oplus H^0(D^-,E)\ar[r]\ar[d]_{\ev_{0.5}}^{\ev_{0.5}} & H^0(D^+\intersection D^-,E)\ar[r]\ar[d]^{\ev_{0.1}\oplus\ev_{0.5}} & H^1(S^1,E)\ar[r] & 0\\
+  \Z^2\oplus\Z^2\ar[r] & \Z^2\oplus\Z^2 & & 
+  }
+\end{align}
+Consider the cohomology class in $H^0(D^+,E)$ represented by the cocycle which maps $0.5\mapsto (a,b)\in\Z^2$. This cocycle restricted to $D^+$ also maps $0.1$ to $(a,b)$ because both of these points lie in the same connected component of $D^+$. Thus under isomorphisms \ref{arsch2} the restriction homomorphism $H^0(D^+,E)\to H^0(D^+\intersection D^-,E)$ maps $(a,b)\mapsto ((a,b),(a,b))$.
+On the other hand the cohomology class in $H^0(D^-,E)$ represented by the cocycle which maps $0.5\mapsto (c,d)\in\Z^2$ maps $0.1\mapsto (d,c)$ since we have to let the monodromy act first. Therefore the restriction homomorphism $H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ maps $(c,d)\mapsto ((d,c),(c,d))$.
+Mere calculation shows that the cokernel of $H^0(D^+,E)\oplus H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ is isomorphic to $\Z$ yielding $$H^1(S^1,E)\cong\Z\text{.}$$
+\end{ex}
+
+\section*{Direct Images}
+\begin{ex}\label{twosheet}
+Consider the $2$-sheeted covering $p:S^1\to S^1,z\to z^2$ viewing $S^1\subset\C$. We want to describe the direct image $p_*\underline{\Z}$ of the constant sheaf $\underline{\Z}$. The sheaf $p_*\underline{\Z}$ is locally constant hence it is determined by its monodromy representation $\pi_1S^1=\Z\curvearrowright\Z^2$. The curve $\gamma:[0,2\pi]\to S^1, t\mapsto\exp(i t)$ is a generator of $\pi_1S^1$ and we want to find a lift of this curve $I\to p_*\underline{\Z}$ to the étalé space of $p_*\underline{Z}$ with any given initial condition $\tilde{\gamma}(0)\in p_*\underline{\Z}_0$:
+
+$$\begin{xy}
+  \xymatrix{
+  & p_*\underline{\Z}\ar[d]^{\pi}\\
+  I\ar[r]_{\gamma}\ar[ru]^{\tilde{\gamma}} & S^1
+  }
+\end{xy}$$
+\end{ex}
+We choose two trivialisations
+$$\begin{xy}
+  \xymatrix{
+p_*\underline{\Z}S^1\setminus\{+1\}=\underline{\Z}p^{-1}S^1\setminus\{+1\}=\underline{\Z}S^1\setminus\{\pm 1\}\ar[r]^/1.25cm/{\phi} & \Z_{upper}\oplus\Z_{lower}\\
+p_*\underline{\Z}S^1\setminus\{-1\}=\underline{\Z}p^{-1}S^1\setminus\{-1\}=\underline{\Z}S^1\setminus\{\pm i\}\ar[r]^/1.25cm/{\psi} & \Z_{left}\oplus\Z_{right}
+  }
+\end{xy}$$
+where for instance one generator of $\Z_{upper}$ corresponds to the locally constant real-valued function taking the value $+1$ on the upper connected arc of $S^1\setminus\{\pm 1\}$ and vanishing on the lower one.\newline
+
+\begin{tikzpicture}[scale=0.7]
+\draw[style=thick] (2,0) circle (2);
+\draw[fill=black] (0,0) circle (0.1);
+\draw[fill=black] (4,0) circle (0.1);
+\draw[style=thick] (2,-6) circle (2);
+\draw[fill=black] (4,-6) circle (0.1);
+\draw[->] (2,-2.2) -- (2,-3.7) node[pos=.5,left] {$p$};
+
+\draw[style=thick] (12,0) circle (2);
+\draw[fill=black] (12,2) circle (0.1);
+\draw[fill=black] (12,-2) circle (0.1);
+\draw[style=thick] (12,-6) circle (2);
+\draw[fill=black] (10,-6) circle (0.1);
+\draw[->] (12,-2.2) -- (12,-3.7) node[pos=.5,right] {$p$};
+
+\draw (2,2.2) node {upper arc};
+\draw (2,-1.6) node {lower arc};
+\draw (9.2,0) node {left arc};
+\draw (15,0) node {right arc};
+\end{tikzpicture}
+
+%FICKEN, IST TIKZ ÄTZEND!!!
+
+\vspace{1cm}
+
+Let us describe the lift $\tilde{\gamma}$ with the initial condition $\tilde{\gamma}(0)=[\psi^{-1}(1,0)]_1$. At time $t=\pi-\varepsilon$ this lift still has the value $[\psi^{-1}(1,0)]_{\gamma(\pi-\varepsilon)}$ and we claim:
+\begin{align}
+\tilde{\gamma}(\pi-\varepsilon)&=[\psi^{-1}(1,0)]_{\gamma(\pi-\varepsilon)}\\
+&=[\phi^{-1}(0,1)]_{\gamma(\pi-\varepsilon)}\label{claim}
+\end{align}
+The point $\tilde{\gamma}(\pi-\varepsilon)$ is obtained as follows: consider the locally constant real-valued function $f\in p_*\underline{\Z}(S^1\setminus\{-1\})=\underline{\Z}(S^1\setminus\{\pm i\})$ having the value $1$ on the left arc and $0$ on the right one. This is a section of $p_*\underline{\Z}$ over the open set $S^1\setminus\{-1\}$. The preimage of $\gamma(\pi-\varepsilon)$ consists of the two points $\exp\left(\frac{i(\pi-\varepsilon)}{2}\right)$ and $\exp\left(\frac{i(3\pi-\varepsilon)}{2}\right)$:\vspace{1cm}
+\begin{tikzpicture}[scale=1]
+\draw[style=thick] (2,0) circle (2);
+\draw[fill=black] (0,0) circle (0.1);
+\draw[fill=black] (4,0) circle (0.1);
+\draw[fill=black] (2,2) circle (0.1);
+\draw[fill=black] (2,-2) circle (0.1);
+\draw[fill=black] (2.4,1.95) circle (0.1);
+\draw[fill=black] (1.6,-1.95) circle (0.1);
+\draw[fill=black] (7,0) circle (0.1);
+\draw[fill=black] (11,0) circle (0.1);
+\draw[fill=black] (7.12,0.7) circle (0.1);
+\draw (6.5,1.1) node {$\gamma(\pi-\varepsilon)$};
+\draw[style=thick] (9,0) circle (2);
+\draw[->] (5,0) -- (6,0) node[pos=0.5,above] {$p$};
+\draw (6.5,0) node {$-1$};
+\draw (11.5,0) node {$+1$};
+\draw (3.7,1.95) node {$\exp\left(\frac{i(\pi-\varepsilon)}{2}\right)$};
+\draw (0.4,-2.3) node {$\exp\left(\frac{i(3\pi-\varepsilon)}{2}\right)$};
+\end{tikzpicture}\newline
+On the other hand the real-valued function $g:=\phi^{-1}(0,1)\in p_*\underline{\Z}(S^1\setminus\{+1\})=\underline{\Z}(S^1\setminus\{\pm 1\})$ having the value $0$ on the upper arc and $1$ on the lower one represents exactly the same stalk of $p_*\underline{\Z}$ at the point $\gamma(\pi-\varepsilon)$. This proves claim (\ref{claim}).
+
+A similar argument shows
+\begin{align*}
+\tilde{\gamma}(2\pi-\varepsilon)&=[\phi^{-1}(0,1)]_{\gamma(2\pi-\varepsilon)}\\
+&=[\psi^{-1}(0,1)]_{\gamma(2\pi-\varepsilon)}
+\end{align*}
+and then $\tilde{\gamma}(2\pi)=[\psi^{-1}(1,0)]_1$. Together with a similar calculation on the other generator of the stalk at $1$ we conclude that in the monodromy representation $\pi_1S^1\curvearrowright\Z^2$ the generator of $\pi_1S^1$ interchanges the two summands of $\Z^2$ -- the stalk of $p_*\underline{\Z}$ at the point $1\in S^1$.
+
+\section*{The Serre Spectral Sequence}
+\begin{ex}Every covering is a fibration and hence yields a Serre spectral sequence converging to the cohomology of the total space. Revisiting Example \ref{twosheet} we observe that every preimage of a point consists of two discrete points and hence alle higher direct images $R^ip_*\underline{\Z},i>0$ vanish. Therefore the Serre spetral sequence looks as follows:\\
+\begin{sseq}[grid=none,labelstep=1,entrysize=1.8cm,xlabels={0;;1;;2}]{0...4}{0...1}
+\ssdrop{H^0(S^1,p_*\underline{\Z})}\ssmove{2}{0}
+\ssdrop{H^1(S^1,p_*\underline{\Z})}\ssmove{2}{0}
+\ssdrop{H^2(S^1,p_*\underline{\Z})}\ssmove{2}{0}
+\end{sseq}\\
+Thus the $E_2$ page equals the limiting page $E_{\infty}$ and we have an isomorphism $$H^k(S^1,p_*\underline{\Z})\cong H^k(S^1,\Z)$$ for any $k\geq 0$. The left hand side expression is sheaf cohomology and the right hand one may be interpreted as singular cohomology with coefficients in $\Z$.
+
+For $k=0$ this is obvious since $H^0(S^1,p_*\underline{\Z})=\Gamma p_*\underline{\Z}=\Z$. For $k>0$ this is some statement about the singular cohomology of $S^1$ with local coefficient system $p_*\underline{\Z}$ of typical fibre $\Z^2$ (cf. \ref{twistarsch}).
+\end{ex}
+
+\begin{ex} Let $M=S^n$ and $$S^{n-1}\hookrightarrow SM\to S^n$$ its unit sphere bundle. We want to calculate the integral homology of $SM$. The $E^2$ entries are\\
+\begin{sseq}[grid=none,labelstep=1,entrysize=1.0cm,xlabels={0;;n-1},ylabels={0;;n}]{0...2}{0...2}
+\ssdrop{\Z}\ssmove{2}{0}
+\ssdrop{\Z}\ssmove{0}{2}
+\ssdrop{\Z}\ssmove{-2}{0}
+\ssdrop{\Z}\ssmove{0}{2}
+\end{sseq}\\
+\end{ex}
+\end{document}
