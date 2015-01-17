@@ -3,42 +3,66 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{luainputenc}
 \usepackage[english]{babel}
+
 \usepackage{amsmath,amsthm,amssymb,stmaryrd,color,graphicx,multirow}
+\usepackage{mathtools}
 \usepackage{cmbright}
-\usepackage[onehalfspacing]{setspace}
+%\usepackage[onehalfspacing]{setspace}
 \usepackage{setspace}
-\usepackage{bussproofs}
 \usepackage{xspace}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{array}
-\usepackage[protrusion=true,expansion=true]{microtype}
-\usepackage[bookmarksdepth=2,pdfencoding=auto]{hyperref}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{hyperref}
 \usepackage[all]{xy}
 \usepackage{sseq}
+
+\usepackage{etoolbox}
+\patchcmd{\subsubsection}{\itshape}{\bfseries}{}{}
+
+\usepackage[natbib=true,style=numeric]{biblatex}
+\usepackage[babel]{csquotes}
+\bibliography{bibliography}
+
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees,positioning,decorations.pathreplacing}
+
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{ex}[defn]{Example}
 \theoremstyle{plain}
-
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{cor}[defn]{Corollary}
 \newtheorem{lemma}[defn]{Lemma}
 \newtheorem{thm}[defn]{Theorem}
-
 \theoremstyle{remark}
 \newtheorem{rem}[defn]{Remark}
-\renewcommand{\C}{\mathbb{C}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\renewcommand{\O}{\mathcal{O}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
+\newcommand{\Ab}{\mathrm{Ab}}
+\newcommand{\AbSh}{\mathrm{AbSh}}
 \newcommand{\union}{\cup}
 \newcommand{\intersection}{\cap}
 \newcommand{\ev}{\mathrm{ev}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\lra}{\longrightarrow}
+
+\newcommand{\ie}{i.\,e.\@\xspace}
+\newcommand{\eg}{e.\,g.\@\xspace}
+\newcommand{\vs}{vs.\@\xspace}
+\newcommand{\resp}{resp.\@\xspace}
+\newcommand{\inv}{inv.\@\xspace}
 
 \title{Higher direct images for dummies}
 
@@ -55,6 +79,11 @@ Your abstract.
 \maketitle
 
 \section{Introduction}
+
+\begin{itemize}
+\item Give definitions of presheaves, sheaves, stalks.
+\end{itemize}
+
 
 \section{Locally constant sheaves}
 
@@ -93,7 +122,107 @@ this should turn out to be helpful).
 \end{itemize}
 
 
-\section{Čech methods}
+\section{Sheaf cohomology and higher direct images}
+
+\subsection{Basic definition and properties}
+
+\begin{defn}Let~$\E$ be a sheaf of abelian groups on a topological space~$X$.
+Then the \emph{$n$-th cohomology of~$X$ with values in~$\E$} is the abelian
+group $H^n(X, \E) \defeq R^n\Gamma_X(\E)$, \ie the value of the~$n$-th right
+derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.
+\end{defn}
+
+Unrolling the definitions, the sheaf cohomology~$H^n(X,\E)$ is the cohomology
+of the cochain complex~$\Gamma_X(\I^\bullet)$, where~$0 \to \E \to I^0 \to I^1
+\to \cdots$ is a resolution of~$\E$ by injective objects. However, this
+description is rarely useful in practice. We will discuss techniques for
+calculating sheaf cohomology below.
+
+\begin{ex}$H^0(X,\E) \cong \E(X)$.\end{ex}
+
+With singular or simplicial cohomology, the choice of a coefficient ring does
+not matter much in many applications; there is always the universal coefficient
+theorem relating~$\Z$-valued cohomology with cohomology with values in other
+rings. \emph{This is decidely not so with sheaf cohomology.} Sheaf cohomology
+is as much about the topological space as it is about the sheaf in question.
+The sheaf cohomology groups depend hugely on the used sheaf.
+
+Unfortunately, there is no useful intuition about sheaf cohomology along the
+ways of ``closed cochains modulo exact cochains''. Instead, some intuition on
+what the elements of the sheaf cohomology groups look like can be gained by
+Čech methods (see below).
+
+The basic proposition about sheaf cohomology is that short exact sequences of
+sheaves induce long exact sequences in cohomology.
+
+\begin{prop}Let~$X$ be a topological space. Let~$0 \to \E \to \F \to \G \to 0$
+be a short exact sequence of sheaves of abelian groups on~$X$. (This means that
+the induced sequences~$0 \to \E_x \to \F_x \to \G_x \to 0$ on stalks are exact
+for all points~$x \in X$.) Then there is a natural long exact sequence
+\[ 0 \to \E(X) \to \F(X) \to \G(X) \to
+  H^1(X,\E) \to H^1(X,\F) \to H^1(X,\G) \to H^2(X,\E) \to \cdots. \]
+\end{prop}
+
+
+\subsection{Relation to ordinary cohomology}
+
+\begin{prop}Let~$X$ be a locally contractible space. Let~$R$ be a ring
+and~$\underline{R}$ be the constant sheaf with stalks~$R$. Then
+$H^\bullet_\text{sing}(X, R) \cong H^\bullet(X, \underline{R})$.
+\end{prop}
+\begin{proof}See~\cite{cibotaru}.
+\end{proof}
+
+\textbf{XXX}: Include comparison theorem with cohomology with values in local
+systems.
+
+
+\subsection{Why sheaf cohomology?}
+
+Sheaf cohomology can be motived from many different angles.
+
+\subsubsection*{The Leray spectral sequence} If~$f : X \to Y$ is any continuous map,
+the cohomology of~$X$,~$Y$, and the fibers of~$f$ are related. The
+Leray spectral sequence expresses this relationship in a precise way,
+describing how the cohomology of~$X$ is composed by the cohomology of~$Y$ and
+the cohomology of the fibers. However, even if one is only interested in the
+cohomology of~$X$ with values in~$\Z$ or in a field, the cohomology of
+non-constant sheaves appears in the spectral sequence. Only in special cases,
+such that~$f$ is a fibration, does cohomology with values in local systems suffice.
+
+\subsubsection*{Global sections} In complex and algebraic geometry, one is often
+interested in the space of global sections of a sheaf~$\E$. For instance, in
+the case that~$\E = \O_X(D)$ is the line bundle associated to a divisor~$D$ on a
+complex manifold or scheme~$X$, $H^0(X,\E)$ is the space of meromorphic
+functions on~$X$ with zeroes and poles behaviour governed by~$D$. However, this
+space, or even its dimension, is hard to compute. Therefore one turns to the
+\emph{Euler characteristic} of~$\E$, the alternating sum
+\[ \chi(X,\E) \defeq \dim H^0(X,\E) - \dim H^1(X,\E) + \dim H^2(X,\E) \pm
+\cdots \]
+in which the global sections dimension appears as the first summand. This
+quantity is in general easier to compute, since it is additive in short exact
+sequences (if~$0 \to \E \to \F \to \G \to 0$ is exact, then~$\chi(X,\F) =
+\chi(X,\E) + \chi(X,\G)$) and constant in certain families. Obviously,
+sheaf cohomology is needed to define the Euler characteristic.
+
+\subsubsection*{Classifying geometric objects} For certain choices of the sheaf, sheaf
+cohomology classifies geometric objects. For instance, if~$X$ is a complex
+manifold,~$H^1(X,\O_X^\times)$ classifies complex line bundles on~$X$ up to
+isomorphism. Here,~$\O_X^\times$ is the sheaf of nowhere vanishing holomorphic
+functions. More generally,~$H^1(X,\mathcal{A}ut(\E))$ classifies sheaves which
+are locally isomorphic to a fixed sheaf~$\E$ and~$H^1(X,\G)$
+classifies~$\G$-torsors on~$X$.
+
+\subsubsection*{Irreducible spaces} The singular cohomology of irreducible topological
+spaces -- spaces which cannot be written as the nontrivial union of two proper
+closed subsets -- is always zero (in positive degrees). This is not a problem
+when working with manifolds, which are irreducible only in the one-point case.
+But it is a problem in algebraic geometry, where schemes with their Zariski
+topology are often irreducible. For such cases, one is forced to look at
+cohomology with values in non-constant sheaves.
+
+
+\subsection{Čech methods}
 
 \begin{itemize}
 \item Give the definition (of the ordered Čech complex).
@@ -104,37 +233,14 @@ sketch the first step of the proof. Link to the very detailed reference
 \url{http://www3.nd.edu/~lnicolae/sheaves_coh.pdf}. Also check out
 \url{http://www.math.ru.nl/~mgroth/teaching/algtopII14/Section08.pdf} and
 \url{http://mathoverflow.net/questions/4214/equivalence-of-grothendieck-style-versus-cech-style-sheaf-cohomology}.
+\item Explain how Mayer--Vietoris is a special case of the Čech-to-sheaf
+spectral sequence.
 \end{itemize}
 
-\begin{verbatim}
-2. Direkte Bilder
+\begin{itemize}
+\item Give the definition of higher direct images.
+\end{itemize}
 
-* Definition Pushforward
-* Lemma über Halme des Pushforwards im Fall des Vordrückens längs
-  abgeschlossener Abbildungen
-* viele Beispiele, möglichst explizite Beschreibungen der direkten Bilder
-  (sich drehende Gitter usw.)
-* dabei fallen vielleicht ein paar allgemeine Lemmas/Beobachtungen ab
-* Wann ist das direkte Bild einer lokal konstanten Garbe wieder lokal
-  konstant? (Vielleicht muss man über sog. konstruierbare Garben reden.
-  Ich glaube, dass das Garben sind, die auf einer Stratifizierung des
-  Raums lokal konstant sind. Auf so etwas sind wir schon gestoßen, etwa
-  bei unserem Torusbeispiel: Außerhalb der kritischen Punkte war die
-  Garbe lokal konstant.)
-
-4. Höhere direkte Bilder
-
-* Definition höhere direkte Bilder
-* viele Beispiele, wie man sie berechnet/möglichst explizit beschreibt
-
-5. Serre-Spektralsequenz
-
-* Definition
-* viele Beispiele, auch mit Differentialen und Ringstruktur
-* Kleinsche Flasche
-* Unit sphere tangent bundle von Sphären
-
-\end{verbatim}
 
 \section*{Locally constant sheaves}
 
@@ -202,6 +308,7 @@ Consider the cohomology class in $H^0(D^+,E)$ represented by the cocycle which m
 On the other hand the cohomology class in $H^0(D^-,E)$ represented by the cocycle which maps $0.5\mapsto (c,d)\in\Z^2$ maps $0.1\mapsto (d,c)$ since we have to let the monodromy act first. Therefore the restriction homomorphism $H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ maps $(c,d)\mapsto ((d,c),(c,d))$.
 Mere calculation shows that the cokernel of $H^0(D^+,E)\oplus H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ is isomorphic to $\Z$ yielding $$H^1(S^1,E)\cong\Z\text{.}$$
 \end{ex}
+
 
 \section*{Direct Images}
 \begin{ex}\label{twosheet}
@@ -282,6 +389,7 @@ A similar argument shows
 \end{align*}
 and then $\tilde{\gamma}(2\pi)=[\psi^{-1}(1,0)]_1$. Together with a similar calculation on the other generator of the stalk at $1$ we conclude that in the monodromy representation $\pi_1S^1\curvearrowright\Z^2$ the generator of $\pi_1S^1$ interchanges the two summands of $\Z^2$ -- the stalk of $p_*\underline{\Z}$ at the point $1\in S^1$.
 
+
 \section*{The Serre Spectral Sequence}
 \begin{ex}Every covering is a fibration and hence yields a Serre spectral sequence converging to the cohomology of the total space. Revisiting Example \ref{twosheet} we observe that every preimage of a point consists of two discrete points and hence alle higher direct images $R^ip_*\underline{\Z},i>0$ vanish. Therefore the Serre spetral sequence looks as follows:\\
 \begin{sseq}[grid=none,labelstep=1,entrysize=1.8cm,xlabels={0;;1;;2}]{0...4}{0...1}
@@ -302,4 +410,16 @@ For $k=0$ this is obvious since $H^0(S^1,p_*\underline{\Z})=\Gamma p_*\underline
 \ssdrop{\Z}\ssmove{0}{2}
 \end{sseq}\\
 \end{ex}
+
+\begin{itemize}
+\item definition
+\item many examples, also with differentials and ring structure
+\item Klein bottle
+\item Unit sphere tangent bundle of spheres
+\end{itemize}
+
+
+\nocite{*}
+\printbibliography
+
 \end{document}
