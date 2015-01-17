@@ -1,0 +1,23 @@
+A gentle and streamlined introduction to the Leray spectral sequence
+
+``In the late 1940s and early 1950s all of us were studying Leray’s papers to
+try to understand how he got the marvelous results he claimed. To be perfectly
+frank, I never got to first base in this enterprise, it was very frustrating.
+Leray was a horrible expositor.'' -- Bill Massey
+
+The results Massey refers to are the numerous applications of the Leray
+spectral sequence, which Leray invented in the 1940s. This is an algebraic tool
+which, given any continuous map $f : X \to Y$ (not necessarily a bundle or
+fibration), relates the cohomology of the base space~$Y$, the total space~$X$,
+and the fibers of~$f$. To this end, Leray had to introduce sheaves and sheaf
+cohomology.
+
+The talk will give an introduction to the Leray spectral sequence, setting up
+only those concepts of sheaf theory and homological algebra which are strictly
+needed for the task. Many examples will illustrate its use. Along the way, we
+will also understand the conceptual background of the Mayer--Vietoris sequence
+and its generalization to coverings consisting of more than two sets.
+
+Basic familiarity with algebraic topology is required, but no prior exposure to
+sheaves and spectral sequences is assumed. After the talk, you will have the
+working knowledge to apply the Leray spectral sequence in your studies.
