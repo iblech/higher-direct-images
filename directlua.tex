@@ -45,6 +45,7 @@
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\I}{\mathcal{I}}
 \renewcommand{\O}{\mathcal{O}}
+\newcommand{\U}{\mathcal{U}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
@@ -275,10 +276,65 @@ formulated in the following way: Consider the pullback (fiber product) diagram
 Then $i^* R^n f_*(\E) \cong R^n f'_*(i'^*\E)$, since pulling back along~$i$ is
 the same as calculating the stalk at~$y$ (example~\textbf{XXX}).
 
+There is also a more general base change theorem, valid for maps~$i : Y' \to Y$
+which are not necessarily the inclusion of a point.
+
 \textbf{XXX}: $R^q f_*(\E) = 0 \Rightarrow H^n(X,\E) \cong H^n(Y,f_*(\E))$.
 
 
-\subsection{Čech methods}
+\section{Čech methods}
+
+\begin{prop}Let~$X$ be a topological space. Let~$\U = (U_i)_i$ be an open
+covering of~$X$. Let~$\E$ be a sheaf of abelian groups
+on~$X$. Assume that~$\E$ is acyclic on the intersections~$U_{i_0 \cdots i_p}$,
+that is~$H^q(U_{i_0 \cdots i_p}, \E) = 0$ for all~$p \geq 0$ and~$q > 0$.
+Then~$H^n(X,\E) \cong \check H^n(\U,\E)$ for all~$n \geq 0$.\end{prop}
+
+\begin{proof}The~$E_2$ page of the Čech-to-derived functor spectral sequence of
+Proposition~\textbf{XXX} is concentrated in the row~$q = 0$. Therefore the
+spectral sequence degenerates. This implies the statement.
+\end{proof}
+
+
+\subsection{The Mayer--Vietoris sequence from a higher point of view}
+
+\begin{prop}Let~$X = A \cup B$ be a covering of a topological space~$X$
+by two open subsets. Let~$\E$ be a sheaf of abelian groups on~$X$. Then there
+is a Mayer--Vietoris sequence
+\[ \cdots \lra H^n(X, \E) \lra
+  H^n(A, \E) \oplus H^n(B, \E) \lra
+  H^n(A \cap B, \E) \stackrel{\partial}{\lra} H^{n+1}(X, \E) \lra \cdots. \]
+\end{prop}
+\begin{proof}Consider the Čech-to-derived functor spectral sequence for the
+given open covering~$\U$. Since~$\U$ consists only of two open sets, its~$E_2$ page looks like this:
+\begin{itemize}
+\item $E_2^{pq}$ is zero for $p \geq 2$.
+\item $E_2^{0q}$ equals the kernel of the map $H^q(A,\E) \oplus H^q(B,\E) \to H^q(A
+\cap B,\E)$ which sends $(s,t)$ to $t|_{A \cap B} - s|_{A \cap B}$. (Use the
+alternating Čech complex.)
+\item $E_2^{1q}$ is the cokernel of that map.
+\end{itemize}
+Therefore the spectral sequence degenerates on the~$E_2$ page. Now
+consider, for any $n \geq 0$, the canonical short exact sequence
+\[ 0 \longrightarrow F^1 E_\infty^n \longrightarrow E_\infty^n
+\longrightarrow E_\infty^n/F^1 E_\infty^n \longrightarrow 0. \]
+Since~$F^2 E_\infty^n = F^3 E_\infty^n = \cdots = 0$ and~$F^0 E_\infty^n =
+F^{-1} E_\infty^n = \cdots = E_\infty^n$ (by the vanishing of most
+columns, see for instance~\cite{greenberg}),
+we can express the outer terms of this sequence in~$E_2$ terms:
+\[ 0 \longrightarrow E_2^{1,n-1} \longrightarrow E_\infty^n
+\longrightarrow E_2^{0,n} \longrightarrow 0. \]
+Explicitly, this is the sequence
+\begin{align*}
+  0 &\longrightarrow \mathrm{cok}(H^{n-1}(A) \oplus H^{n-1}(B) \to
+H^{n-1}(A \cap B)) \\
+  &\longrightarrow H^n(X) \\
+  &\longrightarrow \mathrm{ker}(H^n(A) \oplus H^n(B) \to H^n(A \cap B)) \\
+  &\longrightarrow 0.
+\end{align*}
+We can splice these short exact sequences to obtain the long exact
+Mayer--Vietoris sequence.
+\end{proof}
 
 \begin{itemize}
 \item Give the definition (of the ordered Čech complex).
@@ -293,9 +349,6 @@ sketch the first step of the proof. Link to the very detailed reference
 spectral sequence.
 \end{itemize}
 
-\begin{itemize}
-\item Give the definition of higher direct images.
-\end{itemize}
 
 
 \section*{Locally constant sheaves}
