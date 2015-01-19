@@ -136,7 +136,19 @@ this should turn out to be helpful).
 \begin{defn}Let~$\E$ be a sheaf of abelian groups on a topological space~$X$.
 Then the \emph{$n$-th cohomology of~$X$ with values in~$\E$} is the abelian
 group $H^n(X, \E) \defeq R^n\Gamma_X(\E)$, \ie the value of the~$n$-th right
-derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.
+derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.%
+\footnote{A sequence of sheaves is exact if and only if the induced sequences of
+stalks are exact, for all points of the space. It is a basic exercise in sheaf
+theory to verify that~$\Gamma_X$ is always left-exact. The standard example of
+an exact sequence which is not exact on global sections is the
+\emph{exponential sequence} on~$\C \setminus \{0\}$, $0 \to \underline{\Z} \to \O \to
+\O^\times \to 0$. Here~$\O$ denotes the sheaf of holomorphic functions and the
+morphism~$\O \to \O^\times$ maps a holomorphic function~$f$ to~$\exp \circ f$.
+This morphism is an epimorphism, since any nowhere vanishing holomorphic
+function~$h$ can \emph{locally} be written as~$\exp \circ (\log \circ f)$,
+where~$\log$ is some locally-existing branch of the complex logarithm. But the
+induced map on global sections is not surjective. For instance, the function~$z
+\mapsto 1/z$ has no preimage.}
 \end{defn}
 
 Unrolling the definitions, the sheaf cohomology~$H^n(X,\E)$ is the cohomology
@@ -146,6 +158,14 @@ description is rarely useful in practice. We will discuss techniques for
 calculating sheaf cohomology below.
 
 \begin{ex}$H^0(X,\E) \cong \E(X)$.\end{ex}
+
+\begin{ex}Sheaf cohomology on the one-point space~$\pt = \{ \heartsuit \}$ is
+trivial, in the following sense:~$H^0(\pt,\E) \cong \E(\pt) \cong \E_\heartsuit$
+and~$H^{\geq 1}(\pt,\E) = 0$ for any sheaf~$\E$. This is consistent with the
+well-known vanishing of ordinary (singular or simplicial) cohomology on the
+one-point space. An easy way to verify this is to note that~$\Gamma_\pt :
+\AbSh(\pt) \to \Ab$ is exact (in fact, an equivalence of abelian categories).
+This implies that the higher derived functors vanish.\end{ex}
 
 With singular or simplicial cohomology, the choice of a coefficient ring does
 not matter much in many applications; there is always the universal coefficient
@@ -236,7 +256,7 @@ abelian groups on~$X$. Then the \emph{$n$-th higher direct image of~$\E$
 under~$f$} is the sheaf~$R^n f_*(\E)$ of abelian groups on~$Y$.\end{defn}
 
 In this definition, $f_* : \AbSh(X) \to \AbSh(Y)$ denotes the left-exact
-pushforward functor and~$R^n f_* : \AbSh(X) \to \AbSh(Y)$ its~$n$-th right
+pushforward functor and~$R^n f_* : \AbSh(X) \to \AbSh(Y)$ denotes its~$n$-th right
 derived functor.
 
 \begin{ex}$R^0 f_*(\E) \cong f_*(\E)$.\end{ex}
@@ -253,7 +273,7 @@ following results.
 abelian groups on~$X$. Then~$R^n f_*(\E)$ is the sheafification of the
 presheaf~$U \mapsto H^n(f^{-1}[U], \E)$ on~$X$.\end{prop}
 
-\begin{proof}See \cite[Lemma~\stackhref{01E4}]{stacks-project}.
+\begin{proof}See \cite[Tag~\stackhref{01E4}]{stacks-project}.
 \end{proof}
 
 \begin{thm}[Proper base change theorem]Let~$X$ be a topological space such
@@ -280,6 +300,14 @@ the same as calculating the stalk at~$y$ (example~\textbf{XXX}).
 
 There is also a more general base change theorem, valid for maps~$i : Y' \to Y$
 which are not necessarily the inclusion of a point.
+
+\begin{ex}Let~$\id : X \to X$ denote the identity map. Since its fibers are
+singletons, there should be no ``relative cohomology'' in positive degrees.
+Indeed,~$R^n \id_*(\E)$ is zero for any sheaf~$\E$ and any~$n > 0$. This can be
+verified directly with the definition (note that~$\id_* : \AbSh(X) \to
+\AbSh(X)$ is the identity functor, which is exact). In case that the appropriate
+topological hypotheses are satisfied, it also follows from the proper base
+change theorem.\end{ex}
 
 \textbf{XXX}: $R^q f_*(\E) = 0 \Rightarrow H^n(X,\E) \cong H^n(Y,f_*(\E))$.
 
