@@ -66,6 +66,8 @@
 \newcommand{\inv}{inv.\@\xspace}
 
 \newcommand{\pt}{\mathrm{pt}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\spot}{\underline{\ \ }}
 
 \newcommand{\stackhref}[1]{\href{http://stacks.math.columbia.edu/tag/#1}{#1}}
 
@@ -134,7 +136,19 @@ this should turn out to be helpful).
 \begin{defn}Let~$\E$ be a sheaf of abelian groups on a topological space~$X$.
 Then the \emph{$n$-th cohomology of~$X$ with values in~$\E$} is the abelian
 group $H^n(X, \E) \defeq R^n\Gamma_X(\E)$, \ie the value of the~$n$-th right
-derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.
+derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.%
+\footnote{A sequence of sheaves is exact if and only if the induced sequences of
+stalks are exact, for all points of the space. It is a basic exercise in sheaf
+theory to verify that~$\Gamma_X$ is always left-exact. The standard example of
+an exact sequence which is not exact on global sections is the
+\emph{exponential sequence} on~$\C \setminus \{0\}$, $0 \to \underline{\Z} \to \O \to
+\O^\times \to 0$. Here~$\O$ denotes the sheaf of holomorphic functions and the
+morphism~$\O \to \O^\times$ maps a holomorphic function~$f$ to~$\exp \circ f$.
+This morphism is an epimorphism, since any nowhere vanishing holomorphic
+function~$h$ can \emph{locally} be written as~$\exp \circ (\log \circ f)$,
+where~$\log$ is some locally-existing branch of the complex logarithm. But the
+induced map on global sections is not surjective. For instance, the function~$z
+\mapsto 1/z$ has no preimage.}
 \end{defn}
 
 Unrolling the definitions, the sheaf cohomology~$H^n(X,\E)$ is the cohomology
@@ -144,6 +158,14 @@ description is rarely useful in practice. We will discuss techniques for
 calculating sheaf cohomology below.
 
 \begin{ex}$H^0(X,\E) \cong \E(X)$.\end{ex}
+
+\begin{ex}Sheaf cohomology on the one-point space~$\pt = \{ \heartsuit \}$ is
+trivial, in the following sense:~$H^0(\pt,\E) \cong \E(\pt) \cong \E_\heartsuit$
+and~$H^{\geq 1}(\pt,\E) = 0$ for any sheaf~$\E$. This is consistent with the
+well-known vanishing of ordinary (singular or simplicial) cohomology on the
+one-point space. An easy way to verify this is to note that~$\Gamma_\pt :
+\AbSh(\pt) \to \Ab$ is exact (in fact, an equivalence of abelian categories).
+This implies that the higher derived functors vanish.\end{ex}
 
 With singular or simplicial cohomology, the choice of a coefficient ring does
 not matter much in many applications; there is always the universal coefficient
@@ -234,7 +256,7 @@ abelian groups on~$X$. Then the \emph{$n$-th higher direct image of~$\E$
 under~$f$} is the sheaf~$R^n f_*(\E)$ of abelian groups on~$Y$.\end{defn}
 
 In this definition, $f_* : \AbSh(X) \to \AbSh(Y)$ denotes the left-exact
-pushforward functor and~$R^n f_* : \AbSh(X) \to \AbSh(Y)$ its~$n$-th right
+pushforward functor and~$R^n f_* : \AbSh(X) \to \AbSh(Y)$ denotes its~$n$-th right
 derived functor.
 
 \begin{ex}$R^0 f_*(\E) \cong f_*(\E)$.\end{ex}
@@ -251,7 +273,7 @@ following results.
 abelian groups on~$X$. Then~$R^n f_*(\E)$ is the sheafification of the
 presheaf~$U \mapsto H^n(f^{-1}[U], \E)$ on~$X$.\end{prop}
 
-\begin{proof}See \cite[Lemma~\stackhref{01E4}]{stacks-project}.
+\begin{proof}See \cite[Tag~\stackhref{01E4}]{stacks-project}.
 \end{proof}
 
 \begin{thm}[Proper base change theorem]Let~$X$ be a topological space such
@@ -279,21 +301,95 @@ the same as calculating the stalk at~$y$ (example~\textbf{XXX}).
 There is also a more general base change theorem, valid for maps~$i : Y' \to Y$
 which are not necessarily the inclusion of a point.
 
+\begin{ex}Let~$\id : X \to X$ denote the identity map. Since its fibers are
+singletons, there should be no ``relative cohomology'' in positive degrees.
+Indeed,~$R^n \id_*(\E)$ is zero for any sheaf~$\E$ and any~$n > 0$. This can be
+verified directly with the definition (note that~$\id_* : \AbSh(X) \to
+\AbSh(X)$ is the identity functor, which is exact). In case that the appropriate
+topological hypotheses are satisfied, it also follows from the proper base
+change theorem.\end{ex}
+
 \textbf{XXX}: $R^q f_*(\E) = 0 \Rightarrow H^n(X,\E) \cong H^n(Y,f_*(\E))$.
 
 
 \section{Čech methods}
 
+\begin{defn}Let~$\E$ be a sheaf (or presheaf) of abelian groups on a
+topological space~$X$. Let~$\U = (U_i)_i$ be an open covering. Then
+\emph{the~$n$-th Čech cohomology of~$\E$ with respect to the covering~$\U$},
+$\check H^n(\U,\E)$, is the~$n$-th cohomology group of the \emph{Čech cochain
+complex~$\check C^\bullet(\U,\E)$}, which is defined as follows:
+\[ \check C^n(\U,\E) \defeq \prod_{i_0,\ldots,i_n} \E(U_{i_0 \cdots i_n}), \]
+where we set~$U_{i_0 \cdots i_n} \defeq U_{i_0} \cap \cdots \cap U_{i_n}$ and
+use the differentials given by
+\[ d ((s_{i_0 \cdots i_n})_{i_0 \cdots i_n}) \defeq
+  \Bigl(\sum\nolimits_{k=0}^{n+1} (-1)^k \, s_{i_0 \cdots \widehat{i_k} \cdots
+  i_{n+1}}|_{U_{i_0 \cdots i_{n+1}}}\Bigr)_{i_0 \cdots i_{n+1}}. \]
+\end{defn}
+
+Note that some people argue~\cite{nLab:cech} that Čech cohomology should not be
+termed ``cohomology'', since it fails to satisfy the demands one has for true
+cohomology theories (for instance, that short exact sequences induce long exact
+sequences in cohomology). Rather, it should be regarded as a tool for computing
+sheaf cohomology -- we will discuss their relation in due course.
+
+Unlike with sheaf cohomology, calculating Čech cohomology is in principle a
+viable linear algebra task. We can even restrict to the \emph{ordered Čech
+complex}, given by
+\[ \check C^n_{\text{ord}} = \prod_{i_0 < \cdots < i_n} \E(U_{i_0 \cdots i_n}),
+\]
+where~$I$ is endowed with some fixed total ordering and the differential is
+given by the same formula. By an elementary result, this complex is homotopy
+equivalent to the original one~\cite[Tag~\stackhref{01FG}]{stacks-project} and
+has therefore isomorphic cohomology groups.
+
+
+\subsection{The relation to sheaf cohomology}
+
+Čech cohomology and sheaf cohomology are related by a spectral sequence, the
+\emph{Čech-to-cohomology spectral sequence}.
 \begin{prop}Let~$X$ be a topological space. Let~$\U = (U_i)_i$ be an open
+covering of~$X$. Let~$\E$ be a sheaf of abelian groups on~$X$. Then there is a
+spectral sequence with
+\[ E_2^{pq} = \check H^p(\U, (U \mapsto H^q(U,\E))) \Longrightarrow
+  H^{p+q}(X, \E). \]
+\end{prop}
+\begin{proof}See~\cite[Tag~\stackhref{01ES}]{stacks-project}.
+\end{proof}
+
+\begin{rem}The presheaf of which the Čech cohomology is taken in the
+Čech-to-cohomology spectral sequence, $U \mapsto H^q(U,\E)$, is in general not
+a sheaf. In fact, its sheafification is always
+zero~\cite[Tag~\stackhref{03BA}]{stacks-project}.\end{rem}
+
+In good cases, Čech cohomology does even agree with sheaf cohomology. This is
+the content of \emph{Leray's theorem}.
+
+\begin{prop}[Leray's theorem]Let~$X$ be a topological space. Let~$\U = (U_i)_i$ be an open
 covering of~$X$. Let~$\E$ be a sheaf of abelian groups
 on~$X$. Assume that~$\E$ is acyclic on the intersections~$U_{i_0 \cdots i_p}$,
 that is~$H^q(U_{i_0 \cdots i_p}, \E) = 0$ for all~$p \geq 0$ and~$q > 0$.
 Then~$H^n(X,\E) \cong \check H^n(\U,\E)$ for all~$n \geq 0$.\end{prop}
 
-\begin{proof}The~$E_2$ page of the Čech-to-derived functor spectral sequence of
-Proposition~\textbf{XXX} is concentrated in the row~$q = 0$. Therefore the
-spectral sequence degenerates. This implies the statement.
+\begin{proof}The~$E_2$ page of the Čech-to-cohomology spectral sequence is
+concentrated in the row~$q = 0$, since~$E_2^{pq}$ is a subquotient of~$\check
+C^p(\U, H^q(\spot,\E))$, which is zero for~$q > 0$. Therefore the spectral
+sequence degenerates. This implies the statement.
 \end{proof}
+
+The vanishing assumption of the theorem is usually not checked by hand, but a
+result of \emph{vanishing theorems}. For instance, each of the following
+conditions guarantees that~$H^n(X,\E)$ vanishes for all~$n > 0$:
+\begin{itemize}
+\item The space~$X$ is contractible and locally contractible, and~$\E$ is
+constant. (In this case,~$H^n(X,\E)$ coincides with singular cohomology, for
+which the vanishing is well-known.)
+\item The space~$X$ is an affine scheme and~$\E$ is a
+quasicoherent~$\O_X$-module. (This is \emph{Serre's vanishing theorem}.)
+\item The space~$X$ is paracompact and the sheaf~$\E$ is flabby, fine, or soft.
+Any sheaf of modules over the sheaf of continuous or smooth functions on a
+manifold is fine.
+\end{itemize}
 
 
 \subsection{The Mayer--Vietoris sequence from a higher point of view}
@@ -305,7 +401,7 @@ is a Mayer--Vietoris sequence
   H^n(A, \E) \oplus H^n(B, \E) \lra
   H^n(A \cap B, \E) \stackrel{\partial}{\lra} H^{n+1}(X, \E) \lra \cdots. \]
 \end{prop}
-\begin{proof}Consider the Čech-to-derived functor spectral sequence for the
+\begin{proof}Consider the Čech-to-cohomology spectral sequence for the
 given open covering~$\U$. Since~$\U$ consists only of two open sets, its~$E_2$ page looks like this:
 \begin{itemize}
 \item $E_2^{pq}$ is zero for $p \geq 2$.
@@ -337,18 +433,12 @@ Mayer--Vietoris sequence.
 \end{proof}
 
 \begin{itemize}
-\item Give the definition (of the ordered Čech complex).
-\item Give lemma that Čech cohomology = sheaf cohomology. Sketch the very basic
-idea of the proof.
 \item Also give lemma that sheaf cohomology = singular cohomology. Again,
 sketch the first step of the proof. Link to the very detailed reference
 \url{http://www3.nd.edu/~lnicolae/sheaves_coh.pdf}. Also check out
 \url{http://www.math.ru.nl/~mgroth/teaching/algtopII14/Section08.pdf} and
 \url{http://mathoverflow.net/questions/4214/equivalence-of-grothendieck-style-versus-cech-style-sheaf-cohomology}.
-\item Explain how Mayer--Vietoris is a special case of the Čech-to-sheaf
-spectral sequence.
 \end{itemize}
-
 
 
 \section*{Locally constant sheaves}
