@@ -4,7 +4,7 @@
 \usepackage[utf8]{luainputenc}
 \usepackage[english]{babel}
 
-\usepackage{amsmath,amsthm,amssymb,stmaryrd,color,graphicx,multirow}
+\usepackage{amsmath,amsthm,amssymb,stmaryrd,color,graphicx}
 \usepackage{mathtools}
 \usepackage{cmbright}
 %\usepackage[onehalfspacing]{setspace}
@@ -45,6 +45,7 @@
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\I}{\mathcal{I}}
 \renewcommand{\O}{\mathcal{O}}
+\newcommand{\U}{\mathcal{U}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
@@ -63,6 +64,10 @@
 \newcommand{\vs}{vs.\@\xspace}
 \newcommand{\resp}{resp.\@\xspace}
 \newcommand{\inv}{inv.\@\xspace}
+
+\newcommand{\pt}{\mathrm{pt}}
+
+\newcommand{\stackhref}[1]{\href{http://stacks.math.columbia.edu/tag/#1}{#1}}
 
 \title{Higher direct images for dummies}
 
@@ -133,7 +138,7 @@ derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.
 \end{defn}
 
 Unrolling the definitions, the sheaf cohomology~$H^n(X,\E)$ is the cohomology
-of the cochain complex~$\Gamma_X(\I^\bullet)$, where~$0 \to \E \to I^0 \to I^1
+of the cochain complex~$\Gamma_X(\I^\bullet)$, where~$0 \to \E \to \I^0 \to \I^1
 \to \cdots$ is a resolution of~$\E$ by injective objects. However, this
 description is rarely useful in practice. We will discuss techniques for
 calculating sheaf cohomology below.
@@ -222,7 +227,114 @@ topology are often irreducible. For such cases, one is forced to look at
 cohomology with values in non-constant sheaves.
 
 
-\subsection{Čech methods}
+\subsection{Higher direct images}
+
+\begin{defn}Let~$f : X \to Y$ be a continuous map. Let~$\E$ be a sheaf of
+abelian groups on~$X$. Then the \emph{$n$-th higher direct image of~$\E$
+under~$f$} is the sheaf~$R^n f_*(\E)$ of abelian groups on~$Y$.\end{defn}
+
+In this definition, $f_* : \AbSh(X) \to \AbSh(Y)$ denotes the left-exact
+pushforward functor and~$R^n f_* : \AbSh(X) \to \AbSh(Y)$ its~$n$-th right
+derived functor.
+
+\begin{ex}$R^0 f_*(\E) \cong f_*(\E)$.\end{ex}
+
+\begin{ex}Sheaf cohomology is a special case of higher direct images: Let~$f : X
+\to \pt$ be the unique map to the one-point space. Then~$H^n(X,\E) \cong R^n
+f_*(\E)$ for any sheaf~$\E$ of abelian groups on~$X$.\end{ex}
+
+For general maps~$f : X \to Y$, the higher direct image can be pictured as a
+kind of ``relativized'' sheaf cohomology. To be more specific, we have the
+following results.
+
+\begin{prop}Let~$f : X \to Y$ be a continuous map. Let~$\E$ be a sheaf of
+abelian groups on~$X$. Then~$R^n f_*(\E)$ is the sheafification of the
+presheaf~$U \mapsto H^n(f^{-1}[U], \E)$ on~$X$.\end{prop}
+
+\begin{proof}See \cite[Lemma~\stackhref{01E4}]{stacks-project}.
+\end{proof}
+
+\begin{thm}[Proper base change theorem]Let~$X$ be a topological space such
+that every open subspace is paracompact (\eg let~$X$ be a manifold). Let~$Y$ be
+a Hausdorff space. Let~$f : X \to Y$ be a closed continuous map. Let~$\E$ be a
+sheaf of abelian groups on~$X$. Then~$(R^n f_*(\E))_y \cong H^n(f^{-1}[y],
+\E|_{f^{-1}[y]})$ for any point~$y \in Y$.\end{thm}
+
+\begin{proof}See \cite[Thm.~8.11]{wedhorn}.\end{proof}
+
+In the statement, the restriction~$\E|_{f^{-1}[y]}$ is defined as the pullback
+of~$\E$ under the inclusion map~$i' : f^{-1}[y] \to X$ of the fiber in the
+total space.
+
+The proper base change theorem is very useful for visualizing the higher direct
+image sheaves. The labeling ``base change'' is because the theorem can also be
+formulated in the following way: Consider the pullback (fiber product) diagram
+\[ \xymatrix{
+  f^{-1}[y] \ar@{^{(}->}[r]^{i'} \ar[d]_{f'} & X \ar[d]^f \\
+  \pt \ar@{^{(}->}[r]_i & Y.
+} \]
+Then $i^* R^n f_*(\E) \cong R^n f'_*(i'^*\E)$, since pulling back along~$i$ is
+the same as calculating the stalk at~$y$ (example~\textbf{XXX}).
+
+There is also a more general base change theorem, valid for maps~$i : Y' \to Y$
+which are not necessarily the inclusion of a point.
+
+\textbf{XXX}: $R^q f_*(\E) = 0 \Rightarrow H^n(X,\E) \cong H^n(Y,f_*(\E))$.
+
+
+\section{Čech methods}
+
+\begin{prop}Let~$X$ be a topological space. Let~$\U = (U_i)_i$ be an open
+covering of~$X$. Let~$\E$ be a sheaf of abelian groups
+on~$X$. Assume that~$\E$ is acyclic on the intersections~$U_{i_0 \cdots i_p}$,
+that is~$H^q(U_{i_0 \cdots i_p}, \E) = 0$ for all~$p \geq 0$ and~$q > 0$.
+Then~$H^n(X,\E) \cong \check H^n(\U,\E)$ for all~$n \geq 0$.\end{prop}
+
+\begin{proof}The~$E_2$ page of the Čech-to-derived functor spectral sequence of
+Proposition~\textbf{XXX} is concentrated in the row~$q = 0$. Therefore the
+spectral sequence degenerates. This implies the statement.
+\end{proof}
+
+
+\subsection{The Mayer--Vietoris sequence from a higher point of view}
+
+\begin{prop}Let~$X = A \cup B$ be a covering of a topological space~$X$
+by two open subsets. Let~$\E$ be a sheaf of abelian groups on~$X$. Then there
+is a Mayer--Vietoris sequence
+\[ \cdots \lra H^n(X, \E) \lra
+  H^n(A, \E) \oplus H^n(B, \E) \lra
+  H^n(A \cap B, \E) \stackrel{\partial}{\lra} H^{n+1}(X, \E) \lra \cdots. \]
+\end{prop}
+\begin{proof}Consider the Čech-to-derived functor spectral sequence for the
+given open covering~$\U$. Since~$\U$ consists only of two open sets, its~$E_2$ page looks like this:
+\begin{itemize}
+\item $E_2^{pq}$ is zero for $p \geq 2$.
+\item $E_2^{0q}$ equals the kernel of the map $H^q(A,\E) \oplus H^q(B,\E) \to H^q(A
+\cap B,\E)$ which sends $(s,t)$ to $t|_{A \cap B} - s|_{A \cap B}$. (Use the
+alternating Čech complex.)
+\item $E_2^{1q}$ is the cokernel of that map.
+\end{itemize}
+Therefore the spectral sequence degenerates on the~$E_2$ page. Now
+consider, for any $n \geq 0$, the canonical short exact sequence
+\[ 0 \longrightarrow F^1 E_\infty^n \longrightarrow E_\infty^n
+\longrightarrow E_\infty^n/F^1 E_\infty^n \longrightarrow 0. \]
+Since~$F^2 E_\infty^n = F^3 E_\infty^n = \cdots = 0$ and~$F^0 E_\infty^n =
+F^{-1} E_\infty^n = \cdots = E_\infty^n$ (by the vanishing of most
+columns, see for instance~\cite{greenberg}),
+we can express the outer terms of this sequence in~$E_2$ terms:
+\[ 0 \longrightarrow E_2^{1,n-1} \longrightarrow E_\infty^n
+\longrightarrow E_2^{0,n} \longrightarrow 0. \]
+Explicitly, this is the sequence
+\begin{align*}
+  0 &\longrightarrow \mathrm{cok}(H^{n-1}(A) \oplus H^{n-1}(B) \to
+H^{n-1}(A \cap B)) \\
+  &\longrightarrow H^n(X) \\
+  &\longrightarrow \mathrm{ker}(H^n(A) \oplus H^n(B) \to H^n(A \cap B)) \\
+  &\longrightarrow 0.
+\end{align*}
+We can splice these short exact sequences to obtain the long exact
+Mayer--Vietoris sequence.
+\end{proof}
 
 \begin{itemize}
 \item Give the definition (of the ordered Čech complex).
@@ -237,9 +349,6 @@ sketch the first step of the proof. Link to the very detailed reference
 spectral sequence.
 \end{itemize}
 
-\begin{itemize}
-\item Give the definition of higher direct images.
-\end{itemize}
 
 
 \section*{Locally constant sheaves}
