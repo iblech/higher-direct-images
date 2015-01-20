@@ -278,7 +278,8 @@ presheaf~$U \mapsto H^n(f^{-1}[U], \E)$ on~$X$.\end{prop}
 \begin{proof}See \cite[Tag~\stackhref{01E4}]{stacks-project}.
 \end{proof}
 
-\begin{thm}[Proper base change theorem]Let~$X$ be a topological space such
+\begin{thm}[Proper base change theorem]\label{thm:proper-base-change}
+Let~$X$ be a topological space such
 that every open subspace is paracompact (\eg let~$X$ be a manifold). Let~$Y$ be
 a Hausdorff space. Let~$f : X \to Y$ be a closed continuous map. Let~$\E$ be a
 sheaf of abelian groups on~$X$. Then~$(R^n f_*(\E))_y \cong H^n(f^{-1}[y],
@@ -442,10 +443,40 @@ sketch the first step of the proof. Link to the very detailed reference
 \url{http://mathoverflow.net/questions/4214/equivalence-of-grothendieck-style-versus-cech-style-sheaf-cohomology}.
 \item Čech intuition for sheaf cohomology.
 \item Direct limit over all coverings.
-\item $\H^0(\U,\E) = \E(X)$, if~$\E$ is a sheaf.
+\item $\check H^0(\U,\E) = \E(X)$, if~$\E$ is a sheaf.
 \item Special degrees 0, 1, and 2.
 \item Special case: covering by a single open subset?
 \end{itemize}
+
+
+
+\section{The Leray spectral sequence}
+
+\textbf{XXX}: Has to be moved to the correct place.
+
+\begin{prop}Let~$f : X \to Y$ be a continuous map. Let~$\E$ be a sheaf of
+abelian groups on~$X$. Then there is the \emph{Leray spectral sequence}
+\[ E_2^{pq} = H^p(Y, R^q f_*(\E)) \Longrightarrow H^n(X, \E). \]
+\end{prop}
+
+\begin{proof}The mother of all spectral sequences is the spectral sequence
+associated to a filtered complex. Her first child is the Grothendieck spectral
+sequence; the Leray spectral sequence is a special case of it. Namely, the
+composition
+\[ \AbSh(X) \xrightarrow{f_*} \AbSh(Y) \xrightarrow{\Gamma_Y} \Ab \]
+equals the global sections functor~$\Gamma_X$. Ignoring technicalities about
+adapted classes, we obtain the Grothendieck spectral sequence
+\[ E_2^{pq} = R^p\Gamma_Y(R^q f_*(\E)) \Longrightarrow R^n\Gamma_X(\E). \]
+This is the Leray spectral sequence.
+\end{proof}
+
+\begin{ex}In the situation of the proposition, assume that the higher direct
+images of~$\E$ vanish (\ie~$R^q f_*(\E) = 0$ for~$q > 0$). This is, for
+instance, satisfied if the assumptions of the proper base change theorem
+(Thm.~\ref{thm:proper-base-change}) are fulfilled and if~$\E$ has no higher
+cohomology on the fibers of~$f$. Then the Leray spectral sequence degenerates
+on the second page and shows that~$H^n(X,\E) \cong H^n(Y,f_*(\E)$.
+\end{ex}
 
 
 \section*{Locally constant sheaves}
