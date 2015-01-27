@@ -31,6 +31,7 @@
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{ex}[defn]{Example}
+\newtheorem{warning}[defn]{Warning}
 \theoremstyle{plain}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{cor}[defn]{Corollary}
@@ -59,6 +60,9 @@
 \newcommand{\ev}{\mathrm{ev}}
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\lra}{\longrightarrow}
+\newcommand{\Ouv}{\mathrm{Ouv}}
+\newcommand{\op}{\mathrm{op}}
+\DeclareMathOperator{\colim}{colim}
 
 \newcommand{\ie}{i.\,e.\@\xspace}
 \newcommand{\eg}{e.\,g.\@\xspace}
@@ -88,9 +92,114 @@ Your abstract.
 
 \section{Introduction}
 
-\begin{itemize}
-\item Give definitions of presheaves, sheaves, stalks.
-\end{itemize}
+\section{Basics on sheaves}
+
+\subsection{Presheaves and sheaves}
+
+\begin{defn}A \emph{presheaf}~$\E$ on a topological space~$X$ is a
+functor~$\Ouv(X)^\op \to \Set$, where~$\Ouv(X)$ is the category of open subsets
+of~$X$. For an open subset~$U$, the elements of~$\E(U)$ are called
+\emph{sections of~$\E$ over~$U$}.\end{defn}
+
+\begin{defn}A \emph{sheaf} is a presheaf~$\E$ which satisfies, for any open covering~$U
+= \bigcup_i U_i$ of any open subset~$U$, the following \emph{glueing
+condition}: For any family~$(s_i)_i$ of sections~$s_i \in \E(U_i)$ such
+that~$s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$ for all~$i,j$, there exists a
+unique section~$s \in \E(U)$ such that~$s|_{U_i} = s_i$ for all~$i$.
+\end{defn}
+
+\begin{rem}Let~$\E$ be a sheaf. Then~$\E(\emptyset)$ is a singleton set, by the
+glueing condition for the trivial open covering of the empty set. In contrast,
+a presheaf may take arbitrary values on the empty set.\end{rem}
+
+\begin{ex}On any topological space~$X$, there is the sheaf~$\C$ (or~$\C_\RR$) of
+real-valued functions. On an open subset~$U$, its sections are the continuous
+functions~$U \to \RR$.
+\end{ex}
+
+\begin{ex}On any manifold~$X$, there is the sheaf~$\C^\infty$ of smooth
+real-valued functions.
+\end{ex}
+
+\begin{ex}Let~$A$ be a set. Then, on any topological space~$X$, there is the
+so called \emph{constant presheaf} with~$U \mapsto A$ (and identities as
+restriction maps). For nonempty sets~$A$, this presheaf is only on a sheaf in
+the case that~$X$ is the empty space. There is also the \emph{constant
+sheaf}~$\underline{A}$, which has sections over an open set~$U$ the locally
+constant functions~$U \to A$ (equivalently, the continuous functions~$U \to A$,
+where~$A$ is equipped with the discrete topology).\end{ex}
+
+\begin{ex}\label{ex:sheaf-of-sections}
+Let~$f : E \to X$ be a continuous map. Think of~$f$ as a (not
+necessarily locally trivial) bundle, \ie visualize not the operation~$e \mapsto
+f(e)$, but the fibers~$f^{-1}[x]$. Then there is the \emph{sheaf of sections
+of~$f$}. Its sections over an open subset~$U$ are continuous functions~$s : U
+\to E$ with~$f \circ s = \id|_U$.\end{ex}
+
+
+\subsection{Stalks}
+
+We picture a sheaf not by looking at its vast collection of sets of sections
+(which are indexed by the open subsets of the base space), but by looking at
+its \emph{stalks}. There are indexed by the much smaller and much more
+geometric set of the points of the base space.
+
+\begin{defn}Let~$\E$ be a presheaf of a topological space~$X$. Let~$x \in X$.
+The \emph{stalk} of~$\E$ at~$x$, denoted~$\E_x$, is the set of germs of
+sections of~$\E$ defined on an open neighbourhood of~$x$. More formally, it is
+given by the formula
+\[ \E_x \defeq
+  \colim_{x \in U \subseteq X} \E(U) =
+  \{ \langle U, s \in \E(U) \rangle \,|\, x \in U,
+    \text{$U \subseteq X$ open} \}/{\sim}, \]
+where sections~$\langle U,s \rangle$ and~$\langle V,t \rangle$ are identified
+if and only if they agree of an open neighbourhood of~$x$ in~$U \cap
+V$. The image of a section~$s$ in~$\E_x$ is also denoted~$s_x$.\end{defn}
+
+\begin{ex}Let~$\O_X$ be the sheaf of holomorphic functions on the complex
+plane~$X = \CC$. Then the stalk of~$\O_X$ at the origin,~$\O_{X,0}$, is
+isomorphic to the set of power series with positive convergence radius.\end{ex}
+
+\begin{warning}Let~$\pi : E \to X$ be a vector bundle. Let~$\E$ be the
+associated sheaf of sections (example~\ref{ex:sheaf-of-sections}). Then, in
+most situations, the stalks~$\E_x$ do \emph{not} agree with the fibers~$E_x =
+\pi^{-1}[x]$. This is because~$\E_x$ contains \emph{germs} of sections
+while~$E_x$ only contains the \emph{values} of those sections at~$x$. The
+precise relation is~$E_x \cong \E_x \otimes_{\C_x} \RR$, where~$\RR$ is
+a~$\C_x$-module by the scalar multiplication~$f \cdot a \defeq f(x)a$.
+\end{warning}
+
+\begin{prop}Let~$\E$ be a sheaf on a topological space~$X$. Let~$s$ and~$t$ be
+sections over some open subset~$U$. Then~$s = t$ if and only if~$s_x = t_x$ for
+all~$x \in U$.\end{prop}
+
+
+\subsection{Sections on arbitrary subsets}
+
+\begin{defn}Let~$\E$ be a sheaf on a topological space. Let~$A$ be an arbitrary
+subset of~$X$, not necessarily open. Then~$\Gamma(A,\E)$, the \emph{set of
+sections of~$\E$ over~$A$}, is defined by the formula
+\[ \Gamma(A,\E) \defeq \colim_{A \subseteq U \subseteq X} \E(U), \]
+where the colimit ranges over all open subsets~$U$ of~$X$ containing~$A$.
+In explicit terms, an element of~$\Gamma(A,\E)$ is represented by a section on
+some open neighbourhood of~$A$, where two such sections are identified if and
+only if they agree on an open neighbourhood of~$A$ in their common
+domain.\end{defn}
+
+\begin{ex}Let~$A$ consist of~$n$ distinct discrete points~$x_1,\ldots,x_n$.
+Then~$\Gamma(A,\E) \cong \E_{x_1} \oplus \cdots \oplus \E_{x_n}$.
+\textbf{XXX} proof.\end{ex}
+
+\textbf{XXX}: Example with the sheaves~$\C$ and~$\C^1$.
+
+
+\subsection{Sheafification}
+
+\subsection{Exact sequences}
+
+\subsection{Inverse images}
+
+
 
 
 \section{Locally constant sheaves}
@@ -218,7 +327,7 @@ describing how the cohomology of~$X$ is composed by the cohomology of~$Y$ and
 the cohomology of the fibers. However, even if one is only interested in the
 cohomology of~$X$ with values in~$\ZZ$ or in a field, the cohomology of
 non-constant sheaves appears in the spectral sequence. Only in special cases,
-such that~$f$ is a fibration, does cohomology with values in local systems suffice.
+such as that~$f$ is a fibration, cohomology with values in local systems suffices.
 
 \subsubsection*{Global sections} In complex and algebraic geometry, one is often
 interested in the space of global sections of a sheaf~$\E$. For instance, in
@@ -229,7 +338,7 @@ space, or even its dimension, is hard to compute. Therefore one turns to the
 \emph{Euler characteristic} of~$\E$, the alternating sum
 \[ \chi(X,\E) \defeq \dim H^0(X,\E) - \dim H^1(X,\E) + \dim H^2(X,\E) \pm
 \cdots \]
-in which the global sections dimension appears as the first summand. This
+in which the dimension of the space of global sections as the first summand. This
 quantity is in general easier to compute, since it is additive in short exact
 sequences (if~$0 \to \E \to \F \to \G \to 0$ is exact, then~$\chi(X,\F) =
 \chi(X,\E) + \chi(X,\G)$) and constant in certain families. Obviously,
@@ -354,7 +463,7 @@ has therefore isomorphic cohomology groups.
 covering of~$X$. Let~$\E$ be a sheaf of abelian groups on~$X$. Then there is a
 spectral sequence with
 \[ E_2^{pq} = \check H^p(\U, (U \mapsto H^q(U,\E))) \Longrightarrow
-  H^{p+q}(X, \E). \]
+  H^n(X, \E). \]
 \end{prop}
 \begin{proof}See~\cite[Tag~\stackhref{01ES}]{stacks-project}.
 \end{proof}
