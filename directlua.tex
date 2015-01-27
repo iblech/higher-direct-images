@@ -280,7 +280,7 @@ presheaf~$U \mapsto H^n(f^{-1}[U], \E)$ on~$X$.\end{prop}
 
 \begin{thm}[Proper base change theorem]\label{thm:proper-base-change}
 Let~$X$ be a topological space such
-that every open subspace is paracompact (\eg let~$X$ be a manifold). Let~$Y$ be
+that every open subspace is paracompact (for instance a manifold). Let~$Y$ be
 a Hausdorff space. Let~$f : X \to Y$ be a closed continuous map. Let~$\E$ be a
 sheaf of abelian groups on~$X$. Then~$(R^n f_*(\E))_y \cong H^n(f^{-1}[y],
 \E|_{f^{-1}[y]})$ for any point~$y \in Y$.\end{thm}
@@ -311,8 +311,6 @@ verified directly with the definition (note that~$\id_* : \AbSh(X) \to
 \AbSh(X)$ is the identity functor, which is exact). In case that the appropriate
 topological hypotheses are satisfied, it also follows from the proper base
 change theorem.\end{ex}
-
-\textbf{XXX}: $R^q f_*(\E) = 0 \Rightarrow H^n(X,\E) \cong H^n(Y,f_*(\E))$.
 
 
 \section{Čech methods}
@@ -464,18 +462,20 @@ associated to a filtered complex. Her first child is the Grothendieck spectral
 sequence; the Leray spectral sequence is a special case of it. Namely, the
 composition
 \[ \AbSh(X) \xrightarrow{f_*} \AbSh(Y) \xrightarrow{\Gamma_Y} \Ab \]
-equals the global sections functor~$\Gamma_X$. Ignoring technicalities about
+is the global sections functor~$\Gamma_X$. Ignoring technicalities about
 adapted classes, we obtain the Grothendieck spectral sequence
 \[ E_2^{pq} = R^p\Gamma_Y(R^q f_*(\E)) \Longrightarrow R^n\Gamma_X(\E). \]
 This is the Leray spectral sequence.
+See~\cite[Tag~\stackhref{0732}]{stacks-project} for technical details.
 \end{proof}
 
 \begin{ex}In the situation of the proposition, assume that the higher direct
 images of~$\E$ vanish (\ie~$R^q f_*(\E) = 0$ for~$q > 0$). This is, for
-instance, satisfied if the assumptions of the proper base change theorem
-(Thm.~\ref{thm:proper-base-change}) are fulfilled and if~$\E$ has no higher
-cohomology on the fibers of~$f$. Then the Leray spectral sequence degenerates
-on the second page and shows that~$H^n(X,\E) \cong H^n(Y,f_*(\E)$.
+instance, satisfied if~$\E$ has no higher cohomology on the fibers of~$f$ (and
+the assumptions of the proper base change theorem
+(Thm.~\ref{thm:proper-base-change}) are fulfilled). Then the Leray spectral
+sequence degenerates on the second page and shows that~$H^n(X,\E) \cong
+H^n(Y,f_*(\E)$.
 \end{ex}
 
 
