@@ -39,18 +39,19 @@
 \theoremstyle{remark}
 \newtheorem{rem}[defn]{Remark}
 
-\newcommand{\C}{\mathbb{C}}
+\newcommand{\C}{\mathcal{C}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\I}{\mathcal{I}}
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\U}{\mathcal{U}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\PP}{\mathbb{P}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\Set}{\mathrm{Set}}
 \newcommand{\Ab}{\mathrm{Ab}}
 \newcommand{\AbSh}{\mathrm{AbSh}}
 \newcommand{\union}{\cup}
@@ -141,7 +142,7 @@ derived functor of the global sections functor~$\Gamma_X : \AbSh(X) \to \Ab$.%
 stalks are exact, for all points of the space. It is a basic exercise in sheaf
 theory to verify that~$\Gamma_X$ is always left-exact. The standard example of
 an exact sequence which is not exact on global sections is the
-\emph{exponential sequence} on~$\C \setminus \{0\}$, $0 \to \underline{\Z} \to \O \to
+\emph{exponential sequence} on~$\CC \setminus \{0\}$, $0 \to \underline{\ZZ} \to \O \to
 \O^\times \to 0$. Here~$\O$ denotes the sheaf of holomorphic functions and the
 morphism~$\O \to \O^\times$ maps a holomorphic function~$f$ to~$\exp \circ f$.
 This morphism is an epimorphism, since any nowhere vanishing holomorphic
@@ -171,7 +172,7 @@ This implies that the higher derived functors vanish.\end{ex}
 
 With singular or simplicial cohomology, the choice of a coefficient ring does
 not matter much in many applications; there is always the universal coefficient
-theorem relating~$\Z$-valued cohomology with cohomology with values in other
+theorem relating~$\ZZ$-valued cohomology with cohomology with values in other
 rings. \emph{This is decidely not so with sheaf cohomology.} Sheaf cohomology
 is as much about the topological space as it is about the sheaf in question.
 The sheaf cohomology groups depend hugely on the used sheaf.
@@ -215,7 +216,7 @@ the cohomology of~$X$,~$Y$, and the fibers of~$f$ are related. The
 Leray spectral sequence expresses this relationship in a precise way,
 describing how the cohomology of~$X$ is composed by the cohomology of~$Y$ and
 the cohomology of the fibers. However, even if one is only interested in the
-cohomology of~$X$ with values in~$\Z$ or in a field, the cohomology of
+cohomology of~$X$ with values in~$\ZZ$ or in a field, the cohomology of
 non-constant sheaves appears in the spectral sequence. Only in special cases,
 such that~$f$ is a fibration, does cohomology with values in local systems suffice.
 
@@ -482,7 +483,7 @@ H^n(Y,f_*(\E)$.
 \section*{Locally constant sheaves}
 
 \begin{ex}\label{twistarsch}
-Consider $S^1$ together with the locally constant sheaf of typical stalk $\Z^2$ and monodromy representation $[\gamma].(a,b)=(b,a)$ where $[\gamma]$ is a generator of $\pi_1S^1$. We want to calculate its sheaf cohomology via cohomology with local coefficient system. The bundle of coefficients $E$ is given as $$E:=[0,1]\times\Z^2/\sim$$ with the identification $(0,(a,b))\sim (1,[\gamma].(a,b))=(1,(b,a))$ and the obvious projection $E\to S^1$. We want to apply the Mayer-Vietoris sequence to the standard decomposition $S^1=D^+\union D^-$ of $S^1$ into two open intervals yielding the exactness of
+Consider $S^1$ together with the locally constant sheaf of typical stalk $\ZZ^2$ and monodromy representation $[\gamma].(a,b)=(b,a)$ where $[\gamma]$ is a generator of $\pi_1S^1$. We want to calculate its sheaf cohomology via cohomology with local coefficient system. The bundle of coefficients $E$ is given as $$E:=[0,1]\times\ZZ^2/\sim$$ with the identification $(0,(a,b))\sim (1,[\gamma].(a,b))=(1,(b,a))$ and the obvious projection $E\to S^1$. We want to apply the Mayer-Vietoris sequence to the standard decomposition $S^1=D^+\union D^-$ of $S^1$ into two open intervals yielding the exactness of
 \[\begin{xy}
   \xymatrix{
   H^{k-1}(D^+,E)\oplus H^{k-1}(D^-,E)\ar[r] & H^{k-1}(D^+\intersection D^-,E)\ar[r] & H^k(S^1,E)\ar[r] & H^k(D^+,E)\oplus H^k(D^-,E)
@@ -493,7 +494,7 @@ On a simply connected space a local system of coefficients is globally constant 
 \begin{xy}
   \xymatrix{
   H^0(D^+,E)\oplus H^0(D^-,E)\ar[r]\ar[d] & H^0(D^+\intersection D^-,E)\ar[r]\ar[d] & H^1(S^1,E)\ar[r] & 0\\
-  \Z^2\oplus\Z^2\ar[r] & \Z^2\oplus\Z^2 & & 
+  \ZZ^2\oplus\ZZ^2\ar[r] & \ZZ^2\oplus\ZZ^2 & &
   }
   \end{xy}
 \end{align}
@@ -534,26 +535,26 @@ $\space$};
 \draw (5,0.5) node {$0.5$};
 \draw (11,0) node {$S^1$};
 \end{tikzpicture}\newline
-For an arbitrary space $X$ a cochain representing a class in $H^0(X,E)$ assigns to every point $x\in X$ a value in the corresponding fibre $E_x$. The cochain condition means that this value is constant on connected components of $X$. There are no nontrivial coboundaries in this dimension. Therefore we have a very clear understanding of how the groups in the diagram \ref{arsch} are isomorphic to $\Z^k$ namely by evaluation at some fixed points:
+For an arbitrary space $X$ a cochain representing a class in $H^0(X,E)$ assigns to every point $x\in X$ a value in the corresponding fibre $E_x$. The cochain condition means that this value is constant on connected components of $X$. There are no nontrivial coboundaries in this dimension. Therefore we have a very clear understanding of how the groups in the diagram \ref{arsch} are isomorphic to $\ZZ^k$ namely by evaluation at some fixed points:
 \begin{align}\label{arsch2}
   \xymatrix{
   H^0(D^+,E)\oplus H^0(D^-,E)\ar[r]\ar[d]_{\ev_{0.5}}^{\ev_{0.5}} & H^0(D^+\intersection D^-,E)\ar[r]\ar[d]^{\ev_{0.1}\oplus\ev_{0.5}} & H^1(S^1,E)\ar[r] & 0\\
-  \Z^2\oplus\Z^2\ar[r] & \Z^2\oplus\Z^2 & & 
+  \ZZ^2\oplus\ZZ^2\ar[r] & \ZZ^2\oplus\ZZ^2 & & 
   }
 \end{align}
-Consider the cohomology class in $H^0(D^+,E)$ represented by the cocycle which maps $0.5\mapsto (a,b)\in\Z^2$. This cocycle restricted to $D^+$ also maps $0.1$ to $(a,b)$ because both of these points lie in the same connected component of $D^+$. Thus under isomorphisms \ref{arsch2} the restriction homomorphism $H^0(D^+,E)\to H^0(D^+\intersection D^-,E)$ maps $(a,b)\mapsto ((a,b),(a,b))$.
-On the other hand the cohomology class in $H^0(D^-,E)$ represented by the cocycle which maps $0.5\mapsto (c,d)\in\Z^2$ maps $0.1\mapsto (d,c)$ since we have to let the monodromy act first. Therefore the restriction homomorphism $H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ maps $(c,d)\mapsto ((d,c),(c,d))$.
-Mere calculation shows that the cokernel of $H^0(D^+,E)\oplus H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ is isomorphic to $\Z$ yielding $$H^1(S^1,E)\cong\Z\text{.}$$
+Consider the cohomology class in $H^0(D^+,E)$ represented by the cocycle which maps $0.5\mapsto (a,b)\in\ZZ^2$. This cocycle restricted to $D^+$ also maps $0.1$ to $(a,b)$ because both of these points lie in the same connected component of $D^+$. Thus under isomorphisms \ref{arsch2} the restriction homomorphism $H^0(D^+,E)\to H^0(D^+\intersection D^-,E)$ maps $(a,b)\mapsto ((a,b),(a,b))$.
+On the other hand the cohomology class in $H^0(D^-,E)$ represented by the cocycle which maps $0.5\mapsto (c,d)\in\ZZ^2$ maps $0.1\mapsto (d,c)$ since we have to let the monodromy act first. Therefore the restriction homomorphism $H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ maps $(c,d)\mapsto ((d,c),(c,d))$.
+Mere calculation shows that the cokernel of $H^0(D^+,E)\oplus H^0(D^-,E)\to H^0(D^+\intersection D^-,E)$ is isomorphic to $\ZZ$ yielding $$H^1(S^1,E)\cong\ZZ\text{.}$$
 \end{ex}
 
 
 \section*{Direct Images}
 \begin{ex}\label{twosheet}
-Consider the $2$-sheeted covering $p:S^1\to S^1,z\to z^2$ viewing $S^1\subset\C$. We want to describe the direct image $p_*\underline{\Z}$ of the constant sheaf $\underline{\Z}$. The sheaf $p_*\underline{\Z}$ is locally constant hence it is determined by its monodromy representation $\pi_1S^1=\Z\curvearrowright\Z^2$. The curve $\gamma:[0,2\pi]\to S^1, t\mapsto\exp(i t)$ is a generator of $\pi_1S^1$ and we want to find a lift of this curve $I\to p_*\underline{\Z}$ to the étalé space of $p_*\underline{Z}$ with any given initial condition $\tilde{\gamma}(0)\in p_*\underline{\Z}_0$:
+Consider the $2$-sheeted covering $p:S^1\to S^1,z\to z^2$ viewing $S^1\subset\CC$. We want to describe the direct image $p_*\underline{\ZZ}$ of the constant sheaf $\underline{\ZZ}$. The sheaf $p_*\underline{\ZZ}$ is locally constant hence it is determined by its monodromy representation $\pi_1S^1=\ZZ\curvearrowright\ZZ^2$. The curve $\gamma:[0,2\pi]\to S^1, t\mapsto\exp(i t)$ is a generator of $\pi_1S^1$ and we want to find a lift of this curve $I\to p_*\underline{\ZZ}$ to the étalé space of $p_*\underline{Z}$ with any given initial condition $\tilde{\gamma}(0)\in p_*\underline{\ZZ}_0$:
 
 $$\begin{xy}
   \xymatrix{
-  & p_*\underline{\Z}\ar[d]^{\pi}\\
+  & p_*\underline{\ZZ}\ar[d]^{\pi}\\
   I\ar[r]_{\gamma}\ar[ru]^{\tilde{\gamma}} & S^1
   }
 \end{xy}$$
@@ -561,11 +562,11 @@ $$\begin{xy}
 We choose two trivialisations
 $$\begin{xy}
   \xymatrix{
-p_*\underline{\Z}S^1\setminus\{+1\}=\underline{\Z}p^{-1}S^1\setminus\{+1\}=\underline{\Z}S^1\setminus\{\pm 1\}\ar[r]^/1.25cm/{\phi} & \Z_{upper}\oplus\Z_{lower}\\
-p_*\underline{\Z}S^1\setminus\{-1\}=\underline{\Z}p^{-1}S^1\setminus\{-1\}=\underline{\Z}S^1\setminus\{\pm i\}\ar[r]^/1.25cm/{\psi} & \Z_{left}\oplus\Z_{right}
+p_*\underline{\ZZ}S^1\setminus\{+1\}=\underline{\ZZ}p^{-1}S^1\setminus\{+1\}=\underline{\ZZ}S^1\setminus\{\pm 1\}\ar[r]^/1.25cm/{\phi} & \ZZ_{upper}\oplus\ZZ_{lower}\\
+p_*\underline{\ZZ}S^1\setminus\{-1\}=\underline{\ZZ}p^{-1}S^1\setminus\{-1\}=\underline{\ZZ}S^1\setminus\{\pm i\}\ar[r]^/1.25cm/{\psi} & \ZZ_{left}\oplus\ZZ_{right}
   }
 \end{xy}$$
-where for instance one generator of $\Z_{upper}$ corresponds to the locally constant real-valued function taking the value $+1$ on the upper connected arc of $S^1\setminus\{\pm 1\}$ and vanishing on the lower one.\newline
+where for instance one generator of $\ZZ_{upper}$ corresponds to the locally constant real-valued function taking the value $+1$ on the upper connected arc of $S^1\setminus\{\pm 1\}$ and vanishing on the lower one.\newline
 
 \begin{tikzpicture}[scale=0.7]
 \draw[style=thick] (2,0) circle (2);
@@ -597,7 +598,7 @@ Let us describe the lift $\tilde{\gamma}$ with the initial condition $\tilde{\ga
 \tilde{\gamma}(\pi-\varepsilon)&=[\psi^{-1}(1,0)]_{\gamma(\pi-\varepsilon)}\\
 &=[\phi^{-1}(0,1)]_{\gamma(\pi-\varepsilon)}\label{claim}
 \end{align}
-The point $\tilde{\gamma}(\pi-\varepsilon)$ is obtained as follows: consider the locally constant real-valued function $f\in p_*\underline{\Z}(S^1\setminus\{-1\})=\underline{\Z}(S^1\setminus\{\pm i\})$ having the value $1$ on the left arc and $0$ on the right one. This is a section of $p_*\underline{\Z}$ over the open set $S^1\setminus\{-1\}$. The preimage of $\gamma(\pi-\varepsilon)$ consists of the two points $\exp\left(\frac{i(\pi-\varepsilon)}{2}\right)$ and $\exp\left(\frac{i(3\pi-\varepsilon)}{2}\right)$:\vspace{1cm}
+The point $\tilde{\gamma}(\pi-\varepsilon)$ is obtained as follows: consider the locally constant real-valued function $f\in p_*\underline{\ZZ}(S^1\setminus\{-1\})=\underline{\ZZ}(S^1\setminus\{\pm i\})$ having the value $1$ on the left arc and $0$ on the right one. This is a section of $p_*\underline{\ZZ}$ over the open set $S^1\setminus\{-1\}$. The preimage of $\gamma(\pi-\varepsilon)$ consists of the two points $\exp\left(\frac{i(\pi-\varepsilon)}{2}\right)$ and $\exp\left(\frac{i(3\pi-\varepsilon)}{2}\right)$:\vspace{1cm}
 \begin{tikzpicture}[scale=1]
 \draw[style=thick] (2,0) circle (2);
 \draw[fill=black] (0,0) circle (0.1);
@@ -617,34 +618,34 @@ The point $\tilde{\gamma}(\pi-\varepsilon)$ is obtained as follows: consider the
 \draw (3.7,1.95) node {$\exp\left(\frac{i(\pi-\varepsilon)}{2}\right)$};
 \draw (0.4,-2.3) node {$\exp\left(\frac{i(3\pi-\varepsilon)}{2}\right)$};
 \end{tikzpicture}\newline
-On the other hand the real-valued function $g:=\phi^{-1}(0,1)\in p_*\underline{\Z}(S^1\setminus\{+1\})=\underline{\Z}(S^1\setminus\{\pm 1\})$ having the value $0$ on the upper arc and $1$ on the lower one represents exactly the same stalk of $p_*\underline{\Z}$ at the point $\gamma(\pi-\varepsilon)$. This proves claim (\ref{claim}).
+On the other hand the real-valued function $g:=\phi^{-1}(0,1)\in p_*\underline{\ZZ}(S^1\setminus\{+1\})=\underline{\ZZ}(S^1\setminus\{\pm 1\})$ having the value $0$ on the upper arc and $1$ on the lower one represents exactly the same stalk of $p_*\underline{\ZZ}$ at the point $\gamma(\pi-\varepsilon)$. This proves claim (\ref{claim}).
 
 A similar argument shows
 \begin{align*}
 \tilde{\gamma}(2\pi-\varepsilon)&=[\phi^{-1}(0,1)]_{\gamma(2\pi-\varepsilon)}\\
 &=[\psi^{-1}(0,1)]_{\gamma(2\pi-\varepsilon)}
 \end{align*}
-and then $\tilde{\gamma}(2\pi)=[\psi^{-1}(1,0)]_1$. Together with a similar calculation on the other generator of the stalk at $1$ we conclude that in the monodromy representation $\pi_1S^1\curvearrowright\Z^2$ the generator of $\pi_1S^1$ interchanges the two summands of $\Z^2$ -- the stalk of $p_*\underline{\Z}$ at the point $1\in S^1$.
+and then $\tilde{\gamma}(2\pi)=[\psi^{-1}(1,0)]_1$. Together with a similar calculation on the other generator of the stalk at $1$ we conclude that in the monodromy representation $\pi_1S^1\curvearrowright\ZZ^2$ the generator of $\pi_1S^1$ interchanges the two summands of $\ZZ^2$ -- the stalk of $p_*\underline{\ZZ}$ at the point $1\in S^1$.
 
 
 \section*{The Serre Spectral Sequence}
-\begin{ex}Every covering is a fibration and hence yields a Serre spectral sequence converging to the cohomology of the total space. Revisiting Example \ref{twosheet} we observe that every preimage of a point consists of two discrete points and hence alle higher direct images $R^ip_*\underline{\Z},i>0$ vanish. Therefore the Serre spetral sequence looks as follows:\\
+\begin{ex}Every covering is a fibration and hence yields a Serre spectral sequence converging to the cohomology of the total space. Revisiting Example \ref{twosheet} we observe that every preimage of a point consists of two discrete points and hence alle higher direct images $R^ip_*\underline{\ZZ},i>0$ vanish. Therefore the Serre spetral sequence looks as follows:\\
 \begin{sseq}[grid=none,labelstep=1,entrysize=1.8cm,xlabels={0;;1;;2}]{0...4}{0...1}
-\ssdrop{H^0(S^1,p_*\underline{\Z})}\ssmove{2}{0}
-\ssdrop{H^1(S^1,p_*\underline{\Z})}\ssmove{2}{0}
-\ssdrop{H^2(S^1,p_*\underline{\Z})}\ssmove{2}{0}
+\ssdrop{H^0(S^1,p_*\underline{\ZZ})}\ssmove{2}{0}
+\ssdrop{H^1(S^1,p_*\underline{\ZZ})}\ssmove{2}{0}
+\ssdrop{H^2(S^1,p_*\underline{\ZZ})}\ssmove{2}{0}
 \end{sseq}\\
-Thus the $E_2$ page equals the limiting page $E_{\infty}$ and we have an isomorphism $$H^k(S^1,p_*\underline{\Z})\cong H^k(S^1,\Z)$$ for any $k\geq 0$. The left hand side expression is sheaf cohomology and the right hand one may be interpreted as singular cohomology with coefficients in $\Z$.
+Thus the $E_2$ page equals the limiting page $E_{\infty}$ and we have an isomorphism $$H^k(S^1,p_*\underline{\ZZ})\cong H^k(S^1,\ZZ)$$ for any $k\geq 0$. The left hand side expression is sheaf cohomology and the right hand one may be interpreted as singular cohomology with coefficients in $\ZZ$.
 
-For $k=0$ this is obvious since $H^0(S^1,p_*\underline{\Z})=\Gamma p_*\underline{\Z}=\Z$. For $k>0$ this is some statement about the singular cohomology of $S^1$ with local coefficient system $p_*\underline{\Z}$ of typical fibre $\Z^2$ (cf. \ref{twistarsch}).
+For $k=0$ this is obvious since $H^0(S^1,p_*\underline{\ZZ})=\Gamma p_*\underline{\ZZ}=\ZZ$. For $k>0$ this is some statement about the singular cohomology of $S^1$ with local coefficient system $p_*\underline{\ZZ}$ of typical fibre $\ZZ^2$ (cf. \ref{twistarsch}).
 \end{ex}
 
 \begin{ex} Let $M=S^n$ and $$S^{n-1}\hookrightarrow SM\to S^n$$ its unit sphere bundle. We want to calculate the integral homology of $SM$. The $E^2$ entries are\\
 \begin{sseq}[grid=none,labelstep=1,entrysize=1.0cm,xlabels={0;;n-1},ylabels={0;;n}]{0...2}{0...2}
-\ssdrop{\Z}\ssmove{2}{0}
-\ssdrop{\Z}\ssmove{0}{2}
-\ssdrop{\Z}\ssmove{-2}{0}
-\ssdrop{\Z}\ssmove{0}{2}
+\ssdrop{\ZZ}\ssmove{2}{0}
+\ssdrop{\ZZ}\ssmove{0}{2}
+\ssdrop{\ZZ}\ssmove{-2}{0}
+\ssdrop{\ZZ}\ssmove{0}{2}
 \end{sseq}\\
 \end{ex}
 
