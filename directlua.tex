@@ -333,7 +333,13 @@ for all points~$x \in X$.) Then there is a natural long exact sequence
 and~$\underline{R}$ be the constant sheaf with stalks~$R$. Then
 $H^\bullet_\text{sing}(X, R) \cong H^\bullet(X, \underline{R})$.
 \end{prop}
-\begin{proof}See~\cite{cibotaru}.
+\begin{proof}See~\cite{cibotaru}. The idea is to show that the sheafifications
+of the presheaves of singular chains,~$U \mapsto C^n_\text{sing}(U,R)$, form a
+flabby resolution of the constant sheaf~$\underline{R}$. To show that these
+sheaves form a resolution at all, one has to check that for a basis of open
+subsets~$U$, the sequence~$C^{p-1}_\text{sing}(U,R) \to C^p_\text{sing}(U,R)
+\to C^{p+1}_\text{sing}(U,R)$ is exact. By local contractibility, it suffices
+to consider contractible sets~$U$, for which the exactness is well-known.
 \end{proof}
 
 \textbf{XXX}: Include comparison theorem with cohomology with values in local
@@ -568,11 +574,6 @@ Mayer--Vietoris sequence.
 \end{proof}
 
 \begin{itemize}
-\item Also give lemma that sheaf cohomology = singular cohomology. Again,
-sketch the first step of the proof. Link to the very detailed reference
-\url{http://www3.nd.edu/~lnicolae/sheaves_coh.pdf}. Also check out
-\url{http://www.math.ru.nl/~mgroth/teaching/algtopII14/Section08.pdf} and
-\url{http://mathoverflow.net/questions/4214/equivalence-of-grothendieck-style-versus-cech-style-sheaf-cohomology}.
 \item Čech intuition for sheaf cohomology.
 \item Direct limit over all coverings.
 \item $\check H^0(\U,\E) = \E(X)$, if~$\E$ is a sheaf.
