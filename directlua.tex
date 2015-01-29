@@ -47,6 +47,7 @@
 \newcommand{\I}{\mathcal{I}}
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -89,6 +90,9 @@ Your abstract.
 \end{abstract}
 
 \maketitle
+
+\setcounter{tocdepth}{1}
+\tableofcontents
 
 \section{Introduction}
 
@@ -468,6 +472,9 @@ use the differentials given by
   i_{n+1}}|_{U_{i_0 \cdots i_{n+1}}}\Bigr)_{i_0 \cdots i_{n+1}}. \]
 \end{defn}
 
+\begin{ex}Let~$\E$ is a sheaf and~$\U$ be an arbitrary open covering of~$X$.
+Then~$\check H^0(\U,\E) \cong \E(X)$.\end{ex}
+
 Note that some people argue~\cite{nLab:cech} that Čech cohomology should not be
 termed ``cohomology'', since it fails to satisfy the demands one has for true
 cohomology theories (for instance, that short exact sequences induce long exact
@@ -554,7 +561,8 @@ alternating Čech complex.)
 Therefore the spectral sequence degenerates on the~$E_2$ page. Now
 consider, for any $n \geq 0$, the canonical short exact sequence
 \[ 0 \longrightarrow F^1 E_\infty^n \longrightarrow E_\infty^n
-\longrightarrow E_\infty^n/F^1 E_\infty^n \longrightarrow 0. \]
+\longrightarrow E_\infty^n/F^1 E_\infty^n \longrightarrow 0 \]
+given by the filtration on~$E_\infty^n$.
 Since~$F^2 E_\infty^n = F^3 E_\infty^n = \cdots = 0$ and~$F^0 E_\infty^n =
 F^{-1} E_\infty^n = \cdots = E_\infty^n$ (by the vanishing of most
 columns, see for instance~\cite{greenberg}),
@@ -573,19 +581,37 @@ We can splice these short exact sequences to obtain the long exact
 Mayer--Vietoris sequence.
 \end{proof}
 
+There is no Mayer--Vietoris like sequence for coverings consisting of more than
+two subsets; but the Čech-to-cohomology spectral sequence is still available in
+this case. Its~$E_2$ page will have more nontrivial columns, and those columns
+will have greater combinatorial complexity.
+
+
+\subsection{The colimit over all coverings}
+
+To get rid of the dependence of Čech cohomology on the covering, one takes the
+colimit over all possible coverings: $\check H^n(X,\E) \defeq \colim_\U \check
+H^n(\U,\E)$.
+
+\begin{prop}Let~$\E$ be a sheaf of abelian groups on a topological space~$X$.
+\begin{enumerate}
+\item Different refinements~$\U \to \V$ induce homotopic maps~$\check
+C^n(\U,\E) \to \check C^n(\V,\E)$.
+\item There is a canonical map $\check H^n(X,\E) \cong H^n(X,\E)$ which is an
+isomorphism for~$n = 0$ and~$n = 1$ and a monomorphism for~$n = 2$.
+\item If~$X$ is paracompact, the map is an isomorphism for all~$n$.
+\end{enumerate}\end{prop}
+\begin{proof}See~\cite{brady:sheaf-coh}. Also see the thread~\cite{mo:cech} on
+MathOverflow.\end{proof}
+
 \begin{itemize}
 \item Čech intuition for sheaf cohomology.
-\item Direct limit over all coverings.
-\item $\check H^0(\U,\E) = \E(X)$, if~$\E$ is a sheaf.
-\item Special degrees 0, 1, and 2.
 \item Special case: covering by a single open subset?
 \end{itemize}
 
 
 
 \section{The Leray spectral sequence}
-
-\textbf{XXX}: Has to be moved to the correct place.
 
 \begin{prop}Let~$f : X \to Y$ be a continuous map. Let~$\E$ be a sheaf of
 abelian groups on~$X$. Then there is the \emph{Leray spectral sequence}
@@ -610,7 +636,7 @@ instance, satisfied if~$\E$ has no higher cohomology on the fibers of~$f$ (and
 the assumptions of the proper base change theorem
 (Thm.~\ref{thm:proper-base-change}) are fulfilled). Then the Leray spectral
 sequence degenerates on the second page and shows that~$H^n(X,\E) \cong
-H^n(Y,f_*(\E)$.
+H^n(Y,f_*\E)$.
 \end{ex}
 
 
