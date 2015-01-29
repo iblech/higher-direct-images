@@ -235,15 +235,29 @@ given by~$(f_*\E)(V) \defeq \E(f^{-1}[V])$.\end{defn}
 on~$X$. Then the stalks of the direct image are given by~$(f_*\E)_y \cong
 \Gamma(f^{-1}[y], \E)$.\end{prop}
 
-\begin{proof}\textbf{XXX}\end{proof}
+\begin{proof}Recall, for instance from~\cite[Lemma~8.10]{wedhorn},
+that a continuous map~$f : X \to Y$ is closed if and only if for all~$y \in Y$
+and all open neighbourhoods~$U$ of~$f^{-1}[y]$ in~$X$ there exists an open
+neighbourhood~$V$ of~$y$ such that~$f^{-1}[V] \subseteq U$. Then compare the
+systems of which the colimit is taken:
+\begin{itemize}
+\item For calculating~$(f_*\E)_y$, the colimit is over the
+sets~$\E(f^{-1}[V])$, where~$V$ ranges over the open neighbourhoods of~$y$.
+\item For calculating~$\Gamma(f^{-1}[y],\E)$, the colimit is over the
+sets~$\E(U)$, where~$U$ ranges oven the open neighbourhoods of~$f^{-1}[y]$.
+\end{itemize}
+Any set which appears in the first system also appears in the second system.
+Conversely, by the closedness assumption, any set of the second system can be
+refined to a set of the first system. In more formal terms, the first system is
+included cofinally into the second. Therefore the colimits agree.
+\end{proof}
+
+\begin{ex}In general, the statement is false if the closedness condition is
+dropped. For instance, consider the inclusion~$j : \RR \setminus \{0\} \to \RR$.
+Then~$(j_* \ZZ)_0 \cong \ZZ^2$, but~$\Gamma(j^{-1}[0],\ZZ) = 0$.\end{ex}
 
 \begin{itemize}
-\item Give the definition.
-\item Explain how to easily calculate the stalks of the direct image in case
-the map in question was closed. Explain how this is related to ``proper base
-change''. Explain why closedness is intuitively necessary. Of course, give
-\url{https://www2.math.uni-paderborn.de/fileadmin/Mathematik/People/wedhorn/Lehre/SkriptMannigfaltigkeiten.pdf}
-as a reference.
+\item Explain why closedness is intuitively necessary.
 \item Give description in terms of generators and relations (in the case that
 this should turn out to be helpful).
 \end{itemize}
