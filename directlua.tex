@@ -199,6 +199,21 @@ Then~$\Gamma(A,\E) \cong \E_{x_1} \oplus \cdots \oplus \E_{x_n}$.
 
 \subsection{Sheafification}
 
+\begin{prop}Let~$\E$ be a presheaf on a space~$X$. Let~$s(\E)$ be its
+sheafification. Let~$x \in X$. Then there is a canonical isomorphism~$\E_x
+\cong s(\E)_x$.\end{prop}
+
+\begin{prop}\label{prop:sheafification-zero}
+Let~$\E$ be a presheaf of abelian groups on a space~$X$. Its
+sheafification is the zero sheaf if and only if for any sections~$s \in \E(U)$
+over an open subset~$U$, there is an open covering~$U = \bigcup_i U_i$ such
+that~$s|_{U_i}$ is zero in~$\E(U_i)$ for all~$i$.\end{prop}
+
+\begin{proof}A sheaf is zero if and only if all of its stalks are zero.
+Therefore the claim follows from the previous proposition.
+\end{proof}
+
+
 \subsection{Exact sequences}
 
 \subsection{Inverse images}
@@ -506,9 +521,16 @@ spectral sequence with
 \end{proof}
 
 \begin{rem}The presheaf of which the Čech cohomology is taken in the
-Čech-to-cohomology spectral sequence, $U \mapsto H^q(U,\E)$, is in general not
+Čech-to-cohomology spectral sequence, $U \mapsto H^q(U,\E)$, is for~$q > 0$ in general not
 a sheaf. In fact, its sheafification is always
-zero~\cite[Tag~\stackhref{03BA}]{stacks-project}.\end{rem}
+zero~\cite[Tag~\stackhref{03BA}]{stacks-project}. In light of
+Proposition~\ref{prop:sheafification-zero}, this can be intuitively understood
+as ``any cohomology class is \emph{locally zero}'', since any element
+of~$H^q(U,\E)$ restricts to zero on a suitable open covering. In the case
+that~$X$ is locally contractible and~$\E$ is a constant sheaf (so that sheaf
+cohomology coincides with singular cohomology), this fact is particularly
+vivid.
+\end{rem}
 
 In good cases, Čech cohomology does even agree with sheaf cohomology. This is
 the content of \emph{Leray's theorem}.
